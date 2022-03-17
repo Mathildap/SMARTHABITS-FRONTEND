@@ -1,3 +1,134 @@
+$default-font: 'Raleway', sans-serif;
+$default-color: #313131;
+$btn-blue: #c1d8ff;
+$btn-hover-blue: rgba(193, 216, 255, 0.3);
+$light-grey: #f7f7f7;
+$medium-grey: #ededed;
+$dark-grey: #545454;
+$almost-black: #525252;
+
+/* - - - - - GENERAL - - - - - */
 body {
-    background-color: white;
+    height: 100vh;
+    font-family: $default-font;
+    color: $default-color;
+}
+h1 {
+    font-weight: lighter;
+    letter-spacing: 1.7px;
+    color: #313131;
+}
+
+/* - - - - - SMASH SCREEN - - - - - */
+.smash-screen-page {
+    text-align: center;
+
+    img {
+        position: relative;
+        top: 257px;
+        width: 128px;
+        height: 128px;
+    }
+    h1 {
+        position: relative;
+        top: 273px;
+    }
+}
+
+/* - - - - - USER LOGIN - - - - - */
+.login-page {
+    .login-page-logo {
+        text-align: center;
+        margin-top: 60px;
+    }
+    form {
+        margin-top: 50px;
+    }
+    input,
+    .login-btn {
+        display: block;
+        width: 70%;
+        height: 45px;
+        margin: 13px auto 0px auto;
+        border-radius: 10px;
+        border: 0;
+        background-color: $light-grey;
+        letter-spacing: 0.8px;
+        cursor: pointer;
+        padding-left: 10px;
+    }
+    .login-btn {
+        background-color: $btn-blue;
+        text-transform: uppercase;
+        padding: 0;
+        &:hover {
+            background-color: $btn-hover-blue;
+        }
+    }
+    .btn-link {
+        display: block;
+        background-color: white;
+        font-size: 0.8rem;
+        border: 0;
+        width: 70%;
+        text-align: left;
+        margin: 5px auto;
+        &:hover {
+            color: #fa739d;
+        }
+    }
+    .span-bold {
+        font-weight: 500;
+        cursor: pointer;
+    }
+    hr {
+        width: 70%;
+        margin-top: 40px;
+        outline: 0;
+        border: 0;
+        border-top: 2px solid $medium-grey;
+    }
+    h4 {
+        text-align: center;
+        font-weight: 400;
+        font-size: 1.3rem;
+    }
+    .google-btn {
+        margin: 20px auto;
+        padding: 0;
+        width: 220px;
+        height: 50px;
+        background-color: $light-grey;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .google-icon-wrapper {
+            position: absolute;
+            width: 49px;
+            height: 49px;
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .google-icon {
+            width: 25px;
+            height: 25px;
+        }
+        .btn-text {
+            margin-left: 60px;
+            font-size: 0.9rem;
+            letter-spacing: 0.2px;
+        }
+        &:hover {
+            background-color: $medium-grey;
+        }
+        &:active {
+            background: black;
+        }
+    }
 }
