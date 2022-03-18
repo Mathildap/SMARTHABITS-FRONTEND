@@ -61,6 +61,8 @@ h1 {
         background-color: $btn-blue;
         text-transform: uppercase;
         padding: 0;
+        color: $default-color;
+
         &:hover {
             background-color: $btn-hover-blue;
         }
@@ -73,6 +75,8 @@ h1 {
         width: 70%;
         text-align: left;
         margin: 5px auto;
+        color: $default-color;
+
         &:hover {
             color: #fa739d;
         }
@@ -80,6 +84,9 @@ h1 {
     .span-bold {
         font-weight: 500;
         cursor: pointer;
+    }
+    #errorMsg {
+        text-align: center;
     }
     hr {
         width: 70%;
@@ -107,8 +114,8 @@ h1 {
 
         .google-icon-wrapper {
             position: absolute;
-            width: 49px;
-            height: 49px;
+            width: 48px;
+            height: 48px;
             border-radius: 5px;
             background-color: white;
             display: flex;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
-// import { auth } from '../Firebase/firebase';
-// import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../Firebase/firebase';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 function Login({ userInfo, errorMsg, googleLogin }) {
     let [email, setEmail] = useState('');
@@ -16,19 +16,19 @@ function Login({ userInfo, errorMsg, googleLogin }) {
         setPassword(e.target.value);
     };
 
-    // async function signInWithGoogle() {
-    //     const provider = new GoogleAuthProvider();
-    //     try {
-    //         const res = await signInWithPopup(auth, provider);
-    //         let googleUserInfo = {
-    //             email: res.user.email,
-    //             userName: res.user.displayName,
-    //         };
-    //         googleLogin(googleUserInfo);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    async function signInWithGoogle() {
+        const provider = new GoogleAuthProvider();
+        try {
+            const res = await signInWithPopup(auth, provider);
+            let googleUserInfo = {
+                email: res.user.email,
+                userName: res.user.displayName,
+            };
+            googleLogin(googleUserInfo);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const sendUserInfo = (e) => {
         e.preventDefault();
@@ -83,10 +83,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
                     </button>
                     <hr />
                     <h4>ELLER</h4>
-                    <button
-                        className='google-btn'
-                        // onClick={signInWithGoogle}
-                    >
+                    <button className='google-btn' onClick={signInWithGoogle}>
                         <div className='google-icon-wrapper'>
                             <img
                                 className='google-icon'
