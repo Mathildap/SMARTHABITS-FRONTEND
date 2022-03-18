@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 
-function UserRegister({ newUserInfo, emailExist }) {
+function UserRegister({ newUserInfo, emailExist, Auth }) {
     let [newUserName, setNewUserName] = useState('');
     let [newEmail, setNewEmail] = useState('');
     let [newPassword, setNewPassword] = useState('');
+    let navigate = useNavigate();
 
     const newUserHandler = (e) => {
         e.preventDefault();
@@ -19,7 +20,9 @@ function UserRegister({ newUserInfo, emailExist }) {
         newUserInfo(newUser);
     };
 
-    let navigate = useNavigate();
+    useEffect(() => {
+        if (Auth === true) navigate('/');
+    });
 
     return (
         <section className='login-page'>

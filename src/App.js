@@ -1,14 +1,10 @@
 import './css/style.css';
 import './css/normalize.css';
 import date from 'date-and-time';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { auth } from './Firebase/firebase';
+import { signOut } from 'firebase/auth';
 import SmashScreen from './Pages/SmashScreen';
 import Page404 from './Pages/Page404';
 import UserLogIn from './Pages/UserLogIn';
@@ -29,13 +25,36 @@ function App() {
 
     // - - - - - - -  LOGIN / USER - - - -  - - - //
     let [displayLogin, setDisplayLogin] = useState(true);
-    let [user, setUser] = useState('');
+    let [user, setUser] = useState();
+    let [Auth, setAuth] = useState();
     let [errorMsg, setErrorMsg] = useState();
     let [emailExist, setEmailExist] = useState();
 
-    // USER
+    // CHECK IF USER IS LOGGED IN
+    useEffect(() => {
+        if (localStorage.getItem('User')) {
+            let getUser = JSON.parse(localStorage.getItem('User'));
+            fetch('http://localhost:5000/users/loggedin', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ getUser }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        setErrorMsg('error');
+                        return;
+                    }
+                    setUser({ userName: jsonRes.username, id: jsonRes.id });
+                    setDisplayLogin(false);
+                    setErrorMsg();
+                });
+        }
+    }, []);
+
+    // LOG IN USER
     const userInfo = (info) => {
-        fetch('https://localhost:5000/users/', {
+        fetch('http://localhost:5000/users', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -47,13 +66,21 @@ function App() {
                     return;
                 }
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
+                localStorage.setItem(
+                    'User',
+                    JSON.stringify({
+                        userName: jsonRes.username,
+                        id: jsonRes.id,
+                    })
+                );
+                setDisplayLogin(false);
                 setErrorMsg();
             });
     };
 
     // NEW USER
     const newUserInfo = (newUser) => {
-        fetch('https://localhost:5000/users/new', {
+        fetch('http://localhost:5000/users/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newUser }),
@@ -65,38 +92,52 @@ function App() {
                     return;
                 }
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
+                setAuth(true);
+                localStorage.setItem(
+                    'User',
+                    JSON.stringify({
+                        userName: jsonRes.username,
+                        id: jsonRes.id,
+                    })
+                );
+                setDisplayLogin(false);
                 setEmailExist();
             });
     };
 
     // GOOGLE LOGIN
-    // const googleLogin = (info) => {
-    //     fetch(
-    //         'https://calendar-backend-mathildap.herokuapp.com/users/googleLogin',
-    //         {
-    //             method: 'post',
-    //             headers: { 'Content-type': 'application/json' },
-    //             body: JSON.stringify({ info }),
-    //         }
-    //     )
-    //         .then((resp) => resp.json())
-    //         .then((jsonRes) => {
-    //             const googleUser = {
-    //                 userName: jsonRes.username,
-    //                 id: jsonRes.id,
-    //                 googleLogin: jsonRes.googleLogin,
-    //             };
-    //             setUser(googleUser);
-    //         })
-    //         .catch((err) => console.log(err));
-    // };
+    const googleLogin = (info) => {
+        fetch('http://localhost:5000/users/googleLogin', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                const googleUser = {
+                    userName: jsonRes.username,
+                    id: jsonRes.id,
+                    googleLogin: jsonRes.googleLogin,
+                };
+                setUser(googleUser);
+                setDisplayLogin(false);
+                localStorage.setItem(
+                    'User',
+                    JSON.stringify({
+                        userName: jsonRes.username,
+                        id: jsonRes.id,
+                    })
+                );
+            })
+            .catch((err) => console.log(err));
+    };
 
     // LOG OUT
     const logOutHandler = () => {
         setUser('');
-        // if (user.googleLogin === true) {
-        //     signOut(auth);
-        // }
+        if (user.googleLogin === true) {
+            signOut(auth);
+        }
     };
 
     return (
@@ -108,10 +149,26 @@ function App() {
                     {displayLogin ? (
                         <Router>
                             <Routes>
-                                <Route path='/' element={<UserLogIn />} />
+                                <Route
+                                    exact
+                                    path='/'
+                                    element={
+                                        <UserLogIn
+                                            userInfo={userInfo}
+                                            googleLogin={googleLogin}
+                                            errorMsg={errorMsg}
+                                        />
+                                    }
+                                />
                                 <Route
                                     path='/register'
-                                    element={<UserRegister />}
+                                    element={
+                                        <UserRegister
+                                            emailExist={emailExist}
+                                            newUserInfo={newUserInfo}
+                                            Auth={Auth}
+                                        />
+                                    }
                                 />
                                 <Route path='*' element={<Page404 />} />
                             </Routes>
