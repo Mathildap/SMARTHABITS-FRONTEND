@@ -139,3 +139,59 @@ h1 {
         }
     }
 }
+
+/* - - - - - LANDING PAGE - - - - - */
+.landing-page {
+    footer {
+        bottom: 5px;
+        margin-top: 15px;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button,
+        div {
+            width: 25%;
+            text-align: center;
+        }
+        img {
+            width: 70px;
+        }
+        button {
+            border: 0;
+            background: 0;
+
+            & .logout-icon {
+                font-size: 35px;
+                color: #a0a0a0;
+            }
+        }
+    }
+}
+
+.landning-page-component {
+    border: 2px solid $medium-grey;
+    border-radius: 10px;
+    margin: 7px;
+    min-height: 250px;
+    padding: 20px;
+
+    .landning-page-component-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    h2 {
+        font-weight: 400;
+        margin: 0;
+    }
+    .info-icon,
+    .plus-icon {
+        font-size: 30px;
+    }
+    .info-icon {
+        color: #a0a0a0;
+    }
+}
