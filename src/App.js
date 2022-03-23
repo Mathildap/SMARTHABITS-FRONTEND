@@ -1,7 +1,8 @@
 import './css/style.css';
 import './css/normalize.css';
 import date from 'date-and-time';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
@@ -10,7 +11,8 @@ import Page404 from './Pages/Page404';
 import UserLogIn from './Pages/UserLogIn';
 import UserRegister from './Pages/UserRegister';
 import LandingPage from './Pages/LandingPage';
-import Secret from './Pages/Secret';
+import NewHabit from './Pages/NewHabit';
+export const HabitContext = React.createContext();
 
 function App() {
     // - - - - - - - SMASHSCREEN - - - - - - - //
@@ -135,9 +137,39 @@ function App() {
     // LOG OUT
     const logOutHandler = () => {
         setUser('');
+        localStorage.clear('User');
+        window.location.reload(false);
         if (user.googleLogin === true) {
             signOut(auth);
         }
+    };
+
+    // - - - - - - - NEW HABIT - - - -  - - - //
+    let [habits, setHabits] = useState();
+
+    const newHabitHandler = (info) => {
+        let newHabit = {
+            userId: user.id,
+            habitName: info.habitName,
+            habitGoal: info.habitGoal,
+            habitNumber: info.habitNumber,
+            habitDays: info.habitDays,
+            habitMsg: info.habitMsg,
+        };
+
+        fetch('http://localhost:5000/habits/new', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ newHabit }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits(jsonRes);
+            });
     };
 
     return (
@@ -174,13 +206,25 @@ function App() {
                             </Routes>
                         </Router>
                     ) : (
-                        <Router>
-                            <Routes>
-                                <Route path='/' element={<LandingPage />} />
-                                <Route path='/secret' element={<Secret />} />
-                                <Route path='*' element={<Page404 />} />
-                            </Routes>
-                        </Router>
+                        <HabitContext.Provider value={newHabitHandler}>
+                            <Router>
+                                <Routes>
+                                    <Route
+                                        path='/'
+                                        element={
+                                            <LandingPage
+                                                logOutHandler={logOutHandler}
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path='/newhabit'
+                                        element={<NewHabit />}
+                                    />
+                                    <Route path='*' element={<Page404 />} />
+                                </Routes>
+                            </Router>
+                        </HabitContext.Provider>
                     )}
                 </>
             )}

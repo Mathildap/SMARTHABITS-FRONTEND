@@ -5,7 +5,7 @@ import Todo from '../components/Todo';
 import Notes from '../components/Notes';
 import { FiLogOut } from 'react-icons/fi';
 
-function LandingPage() {
+function LandingPage({ logOutHandler }) {
     return (
         <section className='landing-page'>
             <Habit />
@@ -17,7 +17,7 @@ function LandingPage() {
                     <img src={logo} alt='logo' />
                 </div>
                 <button>
-                    <FiLogOut className='logout-icon' />
+                    <FiLogOut className='logout-icon' onClick={logOutHandler} />
                 </button>
             </footer>
         </section>

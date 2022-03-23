@@ -1,7 +1,10 @@
 import React from 'react';
 import { FiInfo, FiPlus } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 function Habit() {
+    let navigate = useNavigate();
+
     return (
         <section className='habit-component landning-page-component'>
             <header className='landning-page-component-header'>
@@ -11,9 +14,12 @@ function Habit() {
                 <div>
                     <h2>RUTINER</h2>
                 </div>
-                <div>
-                    <FiPlus className='plus-icon' />
-                </div>
+                <button>
+                    <FiPlus
+                        className='plus-icon'
+                        onClick={() => navigate('/newhabit')}
+                    />
+                </button>
             </header>
         </section>
     );
