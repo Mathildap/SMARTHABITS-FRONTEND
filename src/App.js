@@ -144,8 +144,25 @@ function App() {
         }
     };
 
-    // - - - - - - - NEW HABIT - - - -  - - - //
+    // - - - - - - - HABITS - - - -  - - - //
     let [habits, setHabits] = useState();
+
+    // GET HABITS FROM DB
+    useEffect(() => {
+        fetch('http://localhost:5000/habits/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits(jsonRes);
+            });
+    }, [user]);
 
     const newHabitHandler = (info) => {
         let newHabit = {
@@ -206,7 +223,12 @@ function App() {
                             </Routes>
                         </Router>
                     ) : (
-                        <HabitContext.Provider value={newHabitHandler}>
+                        <HabitContext.Provider
+                            value={{
+                                newHabit: newHabitHandler,
+                                habits: habits,
+                            }}
+                        >
                             <Router>
                                 <Routes>
                                     <Route

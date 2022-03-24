@@ -4,12 +4,12 @@ import { HabitContext } from '../App';
 
 function NewHabit() {
     let [habitName, setHabitName] = useState('');
-    let [habitGoal, setHabitGoal] = useState('dayHabit');
+    let [habitGoal, setHabitGoal] = useState('1Idag');
     let [habitNumber, setHabitNumber] = useState();
     let [habitDays, setHabitDays] = useState([]);
     let [habitMsg, setHabitMsg] = useState();
     let navigate = useNavigate();
-    let context = useContext(HabitContext);
+    let context = useContext(HabitContext).newHabit;
 
     const handleHabitNumber = (e) => {
         let parsedNumber = parseInt(e.target.value);
@@ -73,44 +73,41 @@ function NewHabit() {
                                 className='radio__input'
                                 type='radio'
                                 name='myRadio'
-                                id='dayHabit'
+                                id='1Idag'
                                 defaultChecked
                                 onChange={(e) => setHabitGoal(e.target.id)}
                             />
-                            <label className='radio__label' htmlFor='dayHabit'>
+                            <label className='radio__label' htmlFor='1Idag'>
                                 Dag
                             </label>
                             <input
                                 className='radio__input'
                                 type='radio'
                                 name='myRadio'
-                                id='weekHabit'
+                                id='2Vecka'
                                 onChange={(e) => setHabitGoal(e.target.id)}
                             />
-                            <label className='radio__label' htmlFor='weekHabit'>
+                            <label className='radio__label' htmlFor='2Vecka'>
                                 Vecka
                             </label>
                             <input
                                 className='radio__input'
                                 type='radio'
                                 name='myRadio'
-                                id='monthHabit'
+                                id='3Månad'
                                 onChange={(e) => setHabitGoal(e.target.id)}
                             />
-                            <label
-                                className='radio__label'
-                                htmlFor='monthHabit'
-                            >
+                            <label className='radio__label' htmlFor='3Månad'>
                                 Månad
                             </label>
                             <input
                                 className='radio__input'
                                 type='radio'
                                 name='myRadio'
-                                id='yearHabit'
+                                id='4År'
                                 onChange={(e) => setHabitGoal(e.target.id)}
                             />
-                            <label className='radio__label' htmlFor='yearHabit'>
+                            <label className='radio__label' htmlFor='4År'>
                                 År
                             </label>
                         </div>
@@ -126,7 +123,7 @@ function NewHabit() {
                             required
                         />
                     </div>
-                    {habitGoal === 'dayHabit' ? (
+                    {habitGoal === 'Idag' ? (
                         <div className='habit-container'>
                             <p>Välj dagar</p>
                             <div className='checkbox-day'>
