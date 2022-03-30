@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { FiInfo, FiPlus, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
@@ -6,38 +6,45 @@ import { HabitContext } from '../App';
 function Habit() {
     let navigate = useNavigate();
     let habits = useContext(HabitContext).habits;
+    let updateHabit = useContext(HabitContext).updateHabit;
+    let editHabitId = useContext(HabitContext).editHabitId;
 
     const colorDiv = (completed, number) => {
         let percent = (completed / number) * 100;
         return percent;
     };
 
+    const updateHabitHandler1 = (e) => {
+        if (e.target.tagName === 'H4') {
+            return;
+        }
+        updateHabit(e.target.id);
+    };
+    const updateHabitHandler2 = (e) => {
+        if (e.target.tagName === 'H4') {
+            return;
+        }
+        updateHabit(e.target.parentNode.id);
+    };
+
+    const editHabitHandler = (e) => {
+        let id = e.target.parentNode.id;
+        let habitInfo;
+        for (let habit in habits) {
+            if (habits[habit]._id === id) {
+                habitInfo = habits[habit];
+            }
+        }
+        editHabitId(habitInfo);
+        navigate('/edit/');
+    };
+
     let BGColors = [
-        {
-            background:
-                'linear-gradient(0deg, rgba(207,196,253,1) 5%, rgba(129,100,255,1) 100%)',
-            id: 1,
-        },
-        {
-            background:
-                'linear-gradient(0deg, rgba(255,211,221,1) 5%, rgba(248,72,113,1) 100%)',
-            id: 2,
-        },
-        {
-            background:
-                'linear-gradient(0deg, rgba(152,216,204,1) 10%, rgba(38,175,112,1) 100%)',
-            id: 3,
-        },
-        {
-            background:
-                'linear-gradient(0deg, rgba(255,234,229,1) 5%, rgba(229,116,87,1) 100%)',
-            id: 4,
-        },
-        {
-            background:
-                'linear-gradient(0deg, rgba(198,202,255,1) 5%, rgba(86,98,230,1) 100%)',
-            id: 5,
-        },
+        'linear-gradient(0deg, rgba(207,196,253,1) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,211,221,1) 5%, rgba(248,72,113,1) 100%)',
+        'linear-gradient(0deg, rgba(152,216,204,1) 10%, rgba(38,175,112,1) 100%)',
+        'linear-gradient(0deg, rgba(255,234,229,1) 5%, rgba(229,116,87,1) 100%)',
+        'linear-gradient(0deg, rgba(198,202,255,1) 5%, rgba(86,98,230,1) 100%)',
     ];
 
     return (
@@ -66,7 +73,12 @@ function Habit() {
                                 a.habitGoal < b.habitGoal ? -1 : 1
                             )
                             .map((habit, i) => (
-                                <div className='habit' key={habit._id}>
+                                <div
+                                    className='habit'
+                                    key={habit._id}
+                                    onClick={updateHabitHandler1}
+                                    id={habit._id}
+                                >
                                     <div>
                                         <div
                                             className='colored-div'
@@ -76,12 +88,15 @@ function Habit() {
                                                         habit.completed,
                                                         habit.habitNumber
                                                     ) + '%',
-                                                backgroundImage:
-                                                    BGColors[i].background,
+                                                backgroundImage: BGColors[i],
                                             }}
                                         >
-                                            <div>
+                                            <div
+                                                onClick={updateHabitHandler2}
+                                                id={habit._id}
+                                            >
                                                 <h4
+                                                    onClick={editHabitHandler}
                                                     style={{
                                                         color:
                                                             habit.completed /
@@ -93,6 +108,7 @@ function Habit() {
                                                 >
                                                     {habit.habitName}
                                                 </h4>
+                                                <br />
                                                 <p>
                                                     {habit.habitGoal.substring(
                                                         1

@@ -12,6 +12,7 @@ import UserLogIn from './Pages/UserLogIn';
 import UserRegister from './Pages/UserRegister';
 import LandingPage from './Pages/LandingPage';
 import NewHabit from './Pages/NewHabit';
+import EditHabit from './Pages/EditHabit';
 export const HabitContext = React.createContext();
 
 function App() {
@@ -146,6 +147,7 @@ function App() {
 
     // - - - - - - - HABITS - - - -  - - - //
     let [habits, setHabits] = useState();
+    let [editHabit, setEditHabit] = useState();
 
     // GET HABITS FROM DB
     useEffect(() => {
@@ -178,6 +180,63 @@ function App() {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newHabit }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits(jsonRes);
+            });
+    };
+
+    const updateHabitHandler = (id) => {
+        let updateHabit = {
+            id: id,
+        };
+        fetch('http://localhost:5000/habits/update', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ updateHabit }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits(jsonRes);
+            });
+    };
+
+    const editHabitId = (info) => {
+        setEditHabit(info);
+    };
+
+    const updateHabit = (info) => {
+        setHabits((habits) => habits.filter((habit) => habit._id !== info.id));
+        fetch('http://localhost:5000/habits/edit', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits((habits) => habits.concat(jsonRes));
+            });
+    };
+
+    const deleteHabit = (i) => {
+        let info = { userId: user.id, id: i };
+        fetch('http://localhost:5000/habits/delete', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
@@ -227,6 +286,8 @@ function App() {
                             value={{
                                 newHabit: newHabitHandler,
                                 habits: habits,
+                                updateHabit: updateHabitHandler,
+                                editHabitId: editHabitId,
                             }}
                         >
                             <Router>
@@ -242,6 +303,16 @@ function App() {
                                     <Route
                                         path='/newhabit'
                                         element={<NewHabit />}
+                                    />
+                                    <Route
+                                        path='/edit/'
+                                        element={
+                                            <EditHabit
+                                                editHabit={editHabit}
+                                                updateHabit={updateHabit}
+                                                deleteHabit={deleteHabit}
+                                            />
+                                        }
                                     />
                                     <Route path='*' element={<Page404 />} />
                                 </Routes>

@@ -13,6 +13,9 @@ body {
     font-family: $default-font;
     color: $default-color;
 }
+main {
+    position: relative;
+}
 h1 {
     font-weight: lighter;
     letter-spacing: 1.7px;
@@ -219,6 +222,8 @@ h1 {
         font-weight: 500;
         letter-spacing: 1px;
         white-space: nowrap;
+        display: inline-block;
+        cursor: pointer;
     }
     p {
         margin: 10px 0px 20px 20px;
@@ -227,6 +232,7 @@ h1 {
         color: $dark-grey;
         font-weight: 500;
         white-space: nowrap;
+        display: inline-block;
     }
     .check-icon {
         font-size: 40px;
@@ -249,7 +255,8 @@ h1 {
 }
 
 /* - - - - - NEW HABIT PAGE - - - - - */
-.new-habit-page {
+.new-habit-page,
+.edit-page {
     header {
         display: flex;
         justify-content: space-between;
@@ -376,6 +383,65 @@ h1 {
             text-transform: uppercase;
             cursor: pointer;
             transition: background 0.1s;
+        }
+    }
+}
+
+/* - - - - - EDIT HABIT PAGE - - - - - */
+.edit-page {
+    position: absolute;
+    top: 0;
+
+    .edit-habit-container {
+        width: 90%;
+        margin: 10px auto;
+        background-color: $btn-blue;
+        border-radius: 12px;
+
+        .header-icon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            button {
+                background: none;
+                border: 0;
+                width: 20%;
+            }
+            span {
+                width: 20%;
+            }
+            .trash-icon {
+                font-size: 1.5rem;
+                color: $dark-grey;
+            }
+        }
+        h4 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: white;
+            text-align: center;
+            width: 60%;
+            margin: 15px;
+        }
+    }
+    .edit-count-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 10px;
+        p {
+            font-size: 1.4rem;
+            margin: 10px 20px;
+        }
+        button {
+            background: none;
+            border: 0;
+        }
+        .count-icon {
+            font-size: 1.5rem;
         }
     }
 }
