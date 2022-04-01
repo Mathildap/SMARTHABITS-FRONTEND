@@ -1,13 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { FiInfo, FiPlus, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
+import { gsap } from 'gsap';
 
 function Habit() {
     let navigate = useNavigate();
     let habits = useContext(HabitContext).habits;
     let updateHabit = useContext(HabitContext).updateHabit;
     let editHabitId = useContext(HabitContext).editHabitId;
+    let arrowRef = useRef();
 
     const colorDiv = (completed, number) => {
         let percent = (completed / number) * 100;
@@ -47,6 +49,14 @@ function Habit() {
         'linear-gradient(0deg, rgba(198,202,255,1) 5%, rgba(86,98,230,1) 100%)',
     ];
 
+    useEffect(() => {
+        gsap.to(arrowRef.current, {
+            y: '20',
+            repeat: 10,
+            duration: 1,
+        });
+    });
+
     return (
         <section className='habit-component landning-page-component'>
             <header className='landning-page-component-header'>
@@ -56,12 +66,34 @@ function Habit() {
                 <div>
                     <h2>RUTINER</h2>
                 </div>
-                <button>
-                    <FiPlus
-                        className='plus-icon'
-                        onClick={() => navigate('/newhabit')}
-                    />
-                </button>
+                <div>
+                    <button>
+                        <FiPlus
+                            className='plus-icon'
+                            onClick={() => navigate('/newhabit')}
+                        />
+                    </button>
+                    {habits === undefined || habits.length === 0 ? (
+                        <div className='svg-arrow' ref={arrowRef}>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='30.061'
+                                height='30.85'
+                                viewBox='0 0 30.061 30.85'
+                            >
+                                <path
+                                    id='Icon_awesome-arrow-up'
+                                    data-name='Icon awesome-arrow-up'
+                                    d='M2.411,19.98.883,18.451a1.646,1.646,0,0,1,0-2.334L14.261,2.732a1.646,1.646,0,0,1,2.334,0L29.973,16.11a1.646,1.646,0,0,1,0,2.334l-1.529,1.529a1.654,1.654,0,0,1-2.362-.028l-7.9-8.29V31.444A1.649,1.649,0,0,1,16.533,33.1h-2.2a1.649,1.649,0,0,1-1.652-1.652V11.655l-7.9,8.3a1.642,1.642,0,0,1-2.362.028Z'
+                                    transform='translate(-0.397 -2.246)'
+                                    fill='#deeaff'
+                                />
+                            </svg>
+                        </div>
+                    ) : (
+                        ''
+                    )}
+                </div>
             </header>
             <article className='habit-container'>
                 {habits === undefined ? (

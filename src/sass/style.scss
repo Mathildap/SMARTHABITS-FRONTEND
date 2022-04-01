@@ -184,7 +184,8 @@ h1 {
     .landning-page-component-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: top;
+        margin-top: 10px;
     }
     h2 {
         font-weight: 400;
@@ -196,6 +197,9 @@ h1 {
     }
     .info-icon {
         color: #a0a0a0;
+    }
+    .svg-arrow {
+        text-align: center;
     }
     button {
         border: 0;
