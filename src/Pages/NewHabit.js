@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
+import { handleHabitNumber } from '../components/TestFunctions';
 
 function NewHabit() {
     let [habitName, setHabitName] = useState('');
