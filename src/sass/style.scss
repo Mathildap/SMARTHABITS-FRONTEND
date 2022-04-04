@@ -389,13 +389,17 @@ h1 {
             transition: background 0.1s;
         }
     }
+    #habit-day-info {
+        font-size: 0.7rem;
+        font-style: italic;
+        text-transform: none;
+        letter-spacing: 0.2px;
+        color: $dark-grey;
+    }
 }
 
 /* - - - - - EDIT HABIT PAGE - - - - - */
 .edit-page {
-    position: absolute;
-    top: 0;
-
     .edit-habit-container {
         width: 90%;
         margin: 10px auto;
@@ -430,6 +434,9 @@ h1 {
             width: 60%;
             margin: 15px;
         }
+        p {
+            text-align: center;
+        }
     }
     .edit-count-container {
         display: flex;
@@ -446,6 +453,51 @@ h1 {
         }
         .count-icon {
             font-size: 1.5rem;
+        }
+    }
+}
+
+/* - - - - - TODO - - - - - */
+.todo-component {
+    position: relative;
+
+    .todo-div {
+        width: 95%;
+        height: 50px;
+        background-color: $light-grey;
+        margin: 10px auto;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+            margin-left: 20px;
+            color: $dark-grey;
+        }
+        .icon {
+            font-size: 20px;
+            margin: 0 5px;
+            color: $dark-grey;
+        }
+    }
+    .reminder {
+        text-decoration: line-through;
+    }
+    .new-todo-container {
+        width: 100%;
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+
+        input {
+            width: 83%;
+            height: 40px;
+            background-color: $medium-grey;
+            border-radius: 12px;
+            border: 0;
+            padding-left: 10px;
+            bottom: 0;
         }
     }
 }

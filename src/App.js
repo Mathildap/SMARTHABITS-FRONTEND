@@ -166,7 +166,13 @@ function App() {
             });
     }, [user]);
 
+    // NEW HABIT
     const newHabitHandler = (info) => {
+        if (info.habitDays.length === 0) {
+            console.log('inga dagar');
+            info.habitDays = ['none'];
+        }
+
         let newHabit = {
             userId: user.id,
             habitName: info.habitName,
@@ -191,6 +197,7 @@ function App() {
             });
     };
 
+    // UPDATE HABIT
     const updateHabitHandler = (id) => {
         let updateHabit = {
             id: id,
@@ -210,6 +217,7 @@ function App() {
             });
     };
 
+    // EDIT HABIT
     const editHabitId = (info) => {
         setEditHabit(info);
     };
@@ -231,6 +239,7 @@ function App() {
             });
     };
 
+    // DELETE HABIT
     const deleteHabit = (i) => {
         let info = { userId: user.id, id: i };
         fetch('http://localhost:5000/habits/delete', {
@@ -245,6 +254,94 @@ function App() {
                     return;
                 }
                 setHabits(jsonRes);
+            });
+    };
+
+    // - - - - - - - TODO - - - -  - - - //
+    let [todos, setTodos] = useState();
+
+    // GET TODOS FROM DB
+    useEffect(() => {
+        fetch('http://localhost:5000/todos/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setTodos(jsonRes);
+            });
+    }, [user]);
+
+    // NEW TODO
+    const sendTodo = (info) => {
+        let newTodo = {
+            userId: user.id,
+            todoName: info,
+        };
+
+        fetch('http://localhost:5000/todos/new', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ newTodo }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setTodos(jsonRes);
+            });
+    };
+
+    // TOGGLE TODO
+    const toggleTodo = (info) => {
+        let trueOrFalse;
+
+        if (info.done === true) {
+            trueOrFalse = false;
+        } else {
+            trueOrFalse = true;
+        }
+
+        let todo = { id: info.id, done: trueOrFalse, userId: user.id };
+
+        fetch('http://localhost:5000/todos/update', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ todo }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setTodos(jsonRes);
+            });
+    };
+
+    // DELETE TODO
+    const deleteTodo = (info) => {
+        let todo = { id: info, userId: user.id };
+
+        fetch('http://localhost:5000/todos/delete', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ todo }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setTodos(jsonRes);
             });
     };
 
@@ -288,6 +385,10 @@ function App() {
                                 habits: habits,
                                 updateHabit: updateHabitHandler,
                                 editHabitId: editHabitId,
+                                newTodo: sendTodo,
+                                todos: todos,
+                                onToggle: toggleTodo,
+                                onDelete: deleteTodo,
                             }}
                         >
                             <Router>

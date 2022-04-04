@@ -59,6 +59,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
                                 />
                             </button>
                         </div>
+                        <p>{editHabit.habitMsg}</p>
                         <div className='edit-count-container'>
                             <p>
                                 {habitComplete}/{editHabit.habitNumber}

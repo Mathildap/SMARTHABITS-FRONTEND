@@ -6,7 +6,7 @@ function Notes() {
             <header className='landning-page-component-header'>
                 <div></div>
                 <div>
-                    <h2>NOTES</h2>
+                    <h2>ANTECKNINGAR</h2>
                 </div>
                 <div></div>
             </header>

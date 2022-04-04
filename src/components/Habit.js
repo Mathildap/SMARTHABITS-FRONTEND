@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
 import { gsap } from 'gsap';
 import date from 'date-and-time';
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 
 function Habit() {
     let navigate = useNavigate();
@@ -15,8 +14,6 @@ function Habit() {
 
     const now = new Date();
     let today = date.format(now, 'dddd').toLowerCase();
-    console.log(today);
-    console.log(habits);
 
     const colorDiv = (completed, number) => {
         let percent = (completed / number) * 100;
@@ -112,75 +109,85 @@ function Habit() {
                                 a.habitGoal < b.habitGoal ? -1 : 1
                             )
                             .map((habit, i) => (
-                                <>
-                                    {habit.habitDays.length === 0 ? (
-                                        <div
-                                            className='habit'
-                                            key={habit._id}
-                                            onClick={updateHabitHandler1}
-                                            id={habit._id}
-                                        >
-                                            <div>
-                                                <div
-                                                    className='colored-div'
-                                                    style={{
-                                                        width:
-                                                            colorDiv(
-                                                                habit.completed,
-                                                                habit.habitNumber
-                                                            ) + '%',
-                                                        backgroundImage:
-                                                            BGColors[i],
-                                                    }}
-                                                >
+                                <div key={habit._id}>
+                                    {habit.habitDays.map((day) =>
+                                        day === today || day === 'none' ? (
+                                            <div
+                                                className='habit'
+                                                key={habit._id}
+                                                onClick={updateHabitHandler1}
+                                                id={habit._id}
+                                            >
+                                                <div>
                                                     <div
-                                                        onClick={
-                                                            updateHabitHandler2
-                                                        }
-                                                        id={habit._id}
+                                                        className='colored-div'
+                                                        style={{
+                                                            width:
+                                                                colorDiv(
+                                                                    habit.completed,
+                                                                    habit.habitNumber
+                                                                ) + '%',
+                                                            backgroundImage:
+                                                                BGColors[i],
+                                                        }}
                                                     >
-                                                        <h4
+                                                        <div
                                                             onClick={
-                                                                editHabitHandler
+                                                                updateHabitHandler2
                                                             }
-                                                            style={{
-                                                                color:
-                                                                    habit.completed /
-                                                                        habit.habitNumber >
-                                                                    0
-                                                                        ? 'white'
-                                                                        : '',
-                                                            }}
+                                                            id={habit._id}
                                                         >
-                                                            {habit.habitName}
-                                                        </h4>
-                                                        <br />
-                                                        <p>
-                                                            {habit.habitGoal.substring(
-                                                                1
-                                                            )}
-                                                            : {habit.completed}/
-                                                            {habit.habitNumber}
-                                                        </p>
+                                                            <h4
+                                                                onClick={
+                                                                    editHabitHandler
+                                                                }
+                                                                style={{
+                                                                    color:
+                                                                        habit.completed /
+                                                                            habit.habitNumber >
+                                                                        0
+                                                                            ? 'white'
+                                                                            : '',
+                                                                }}
+                                                            >
+                                                                {
+                                                                    habit.habitName
+                                                                }
+                                                            </h4>
+                                                            <br />
+                                                            <p>
+                                                                {habit.habitGoal.substring(
+                                                                    1
+                                                                )}
+                                                                :{' '}
+                                                                {
+                                                                    habit.completed
+                                                                }
+                                                                /
+                                                                {
+                                                                    habit.habitNumber
+                                                                }
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div>
-                                                <FiCheck
-                                                    className={
-                                                        habit.habitNumber ===
-                                                        habit.completed
-                                                            ? 'check-icon habit-comp'
-                                                            : 'check-icon habit-not-comp'
-                                                    }
-                                                />
+                                                <div>
+                                                    <FiCheck
+                                                        className={
+                                                            habit.habitNumber ===
+                                                            habit.completed
+                                                                ? 'check-icon habit-comp'
+                                                                : 'check-icon habit-not-comp'
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    ) : (
-                                        ''
+                                        ) : (
+                                            ''
+                                        )
                                     )}
-                                </>
+                                </div>
                             ))}
                     </>
                 )}

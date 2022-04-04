@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
-import { handleHabitNumber } from '../components/TestFunctions';
 
 function NewHabit() {
     let [habitName, setHabitName] = useState('');
@@ -220,6 +219,10 @@ function NewHabit() {
                                     Sön
                                 </label>
                             </div>
+                            <p id='habit-day-info'>
+                                Välj vilka dagar rutiner ska gälla, eller lämna
+                                tomt för alla dagar
+                            </p>
                         </div>
                     ) : (
                         ''
