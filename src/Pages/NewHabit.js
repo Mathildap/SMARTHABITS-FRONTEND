@@ -124,7 +124,7 @@ function NewHabit() {
                             required
                         />
                     </div>
-                    {habitGoal === 'Idag' ? (
+                    {habitGoal === '1Idag' ? (
                         <div className='habit-container'>
                             <p>Välj dagar</p>
                             <div className='checkbox-day'>
