@@ -1,38 +1,36 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { FiInfo, FiPlus, FiCheck } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { HabitContext } from '../App';
 import { gsap } from 'gsap';
 import date from 'date-and-time';
+import Info from './Info';
 
 function Habit() {
     let navigate = useNavigate();
+    let arrowRef = useRef();
     let habits = useContext(HabitContext).habits;
     let updateHabit = useContext(HabitContext).updateHabit;
     let editHabitId = useContext(HabitContext).editHabitId;
-    let arrowRef = useRef();
-
+    let [info, setInfo] = useState(false);
     const now = new Date();
     let today = date.format(now, 'dddd').toLowerCase();
 
-    const colorDiv = (completed, number) => {
-        let percent = (completed / number) * 100;
-        return percent;
-    };
-
+    // INCREASE
     const updateHabitHandler1 = (e) => {
-        if (e.target.tagName === 'H4') {
+        if (e.target.tagName === 'a') {
             return;
         }
         updateHabit(e.target.id);
     };
     const updateHabitHandler2 = (e) => {
-        if (e.target.tagName === 'H4') {
+        if (e.target.tagName === 'a') {
             return;
         }
         updateHabit(e.target.parentNode.id);
     };
 
+    // EDIT
     const editHabitHandler = (e) => {
         let id = e.target.parentNode.id;
         let habitInfo;
@@ -45,6 +43,13 @@ function Habit() {
         navigate('/edit/');
     };
 
+    // COLOR DIV
+    const colorDiv = (completed, number) => {
+        let percent = (completed / number) * 100;
+        return percent;
+    };
+
+    // COLORS
     let BGColors = [
         'linear-gradient(0deg, rgba(207,196,253,1) 5%, rgba(129,100,255,1) 100%)',
         'linear-gradient(0deg, rgba(255,211,221,1) 5%, rgba(248,72,113,1) 100%)',
@@ -53,25 +58,50 @@ function Habit() {
         'linear-gradient(0deg, rgba(198,202,255,1) 5%, rgba(86,98,230,1) 100%)',
     ];
 
+    // SVG ANIMATION
     useEffect(() => {
-        gsap.to(arrowRef.current, {
-            y: '20',
-            repeat: 10,
-            duration: 1,
-        });
+        if (habits.lenght === 0) {
+            gsap.to(arrowRef.current, {
+                y: '20',
+                repeat: 10,
+                duration: 1,
+            });
+        }
     });
+
+    // ENTER PRESS
+    const keyPressHandler = (e) => {
+        if (e.keyCode === 0) {
+            setInfo(true);
+        }
+    };
 
     return (
         <section className='habit-component landning-page-component'>
+            {info ? <Info closeInfo={() => setInfo(false)} /> : ''}
             <header className='landning-page-component-header'>
                 <div>
-                    <FiInfo className='info-icon' />
+                    <button
+                        className='icon'
+                        type='submit'
+                        onKeyPress={keyPressHandler}
+                    >
+                        <FiInfo
+                            className='info-icon'
+                            onClick={() => setInfo(true)}
+                        />
+                    </button>
                 </div>
                 <div>
                     <h2>RUTINER</h2>
                 </div>
                 <div>
-                    <button>
+                    <button
+                        className='icon'
+                        onKeyPress={(e) =>
+                            e.keyCode === 0 ? navigate('/newhabit') : ''
+                        }
+                    >
                         <FiPlus
                             className='plus-icon'
                             onClick={() => navigate('/newhabit')}
@@ -112,7 +142,7 @@ function Habit() {
                                 <div key={habit._id}>
                                     {habit.habitDays.map((day) =>
                                         day === today || day === 'none' ? (
-                                            <div
+                                            <button
                                                 className='habit'
                                                 key={habit._id}
                                                 onClick={updateHabitHandler1}
@@ -137,7 +167,8 @@ function Habit() {
                                                             }
                                                             id={habit._id}
                                                         >
-                                                            <h4
+                                                            <Link
+                                                                to='/edit'
                                                                 onClick={
                                                                     editHabitHandler
                                                                 }
@@ -153,7 +184,7 @@ function Habit() {
                                                                 {
                                                                     habit.habitName
                                                                 }
-                                                            </h4>
+                                                            </Link>
                                                             <br />
                                                             <p>
                                                                 {habit.habitGoal.substring(
@@ -182,7 +213,7 @@ function Habit() {
                                                         }
                                                     />
                                                 </div>
-                                            </div>
+                                            </button>
                                         ) : (
                                             ''
                                         )

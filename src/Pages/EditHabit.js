@@ -26,7 +26,6 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
     };
 
     const deleteHabitHandler = () => {
-        // ADD ALERT
         deleteHabit(editHabit._id);
         navigate('/');
     };
@@ -52,11 +51,8 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
                         <div className='header-icon'>
                             <span></span>
                             <h4>{editHabit.habitName}</h4>
-                            <button>
-                                <FiTrash2
-                                    className='trash-icon'
-                                    onClick={deleteHabitHandler}
-                                />
+                            <button onClick={deleteHabitHandler}>
+                                <FiTrash2 className='trash-icon' />
                             </button>
                         </div>
                         <p>{editHabit.habitMsg}</p>
@@ -65,17 +61,11 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
                                 {habitComplete}/{editHabit.habitNumber}
                             </p>
                             <div>
-                                <button>
-                                    <FiMinus
-                                        className='count-icon'
-                                        onClick={decrease}
-                                    />
+                                <button onClick={decrease}>
+                                    <FiMinus className='count-icon' />
                                 </button>
-                                <button>
-                                    <FiPlus
-                                        className='count-icon'
-                                        onClick={increase}
-                                    />
+                                <button onClick={increase}>
+                                    <FiPlus className='count-icon' />
                                 </button>
                             </div>
                         </div>

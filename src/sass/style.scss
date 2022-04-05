@@ -203,12 +203,16 @@ h1 {
     }
     button {
         border: 0;
+    }
+    .icon {
         background: 0;
     }
 }
 
 /* - - - - - HABITS - - - - - */
 .habit {
+    display: block;
+    text-align: left;
     width: 95%;
     height: 70px;
     background-color: $medium-grey;
@@ -218,8 +222,9 @@ h1 {
     align-items: center;
     justify-content: space-between;
     position: relative;
+    padding: 0;
 
-    h4 {
+    a {
         font-size: 1.2rem;
         margin: 10px 0px 0px 20px;
         text-transform: uppercase;
@@ -227,7 +232,7 @@ h1 {
         letter-spacing: 1px;
         white-space: nowrap;
         display: inline-block;
-        cursor: pointer;
+        text-decoration: none;
     }
     p {
         margin: 10px 0px 20px 20px;
@@ -499,5 +504,34 @@ h1 {
             padding-left: 10px;
             bottom: 0;
         }
+    }
+}
+
+/* - - - - - INFO - - - - - */
+.info-container {
+    position: fixed;
+    top: 28%;
+    left: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80%;
+    display: inline-block;
+    margin: 0 15%;
+    z-index: 99;
+    border-radius: 10px;
+    border: 1px solid $dark-grey;
+    background-image: linear-gradient(to bottom, #c1d8ff, #f5f9ff);
+    font-size: 1.1rem;
+    line-height: 1.5;
+
+    p {
+        margin: 30px 20px;
+    }
+    button {
+        tabindex: 1;
+        position: absolute;
+        right: 10px;
+        font-size: 25px;
+        padding: 10px;
     }
 }

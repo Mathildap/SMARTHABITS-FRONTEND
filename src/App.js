@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
-import SmashScreen from './Pages/SmashScreen';
+import SplashScreen from './Pages/SplashScreen';
 import Page404 from './Pages/Page404';
 import UserLogIn from './Pages/UserLogIn';
 import UserRegister from './Pages/UserRegister';
@@ -17,11 +17,11 @@ export const HabitContext = React.createContext();
 
 function App() {
     // - - - - - - - SMASHSCREEN - - - - - - - //
-    let [smashScreen, setSmashScreen] = useState(true);
+    let [splashScreen, setSplashScreen] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setSmashScreen(false);
+            setSplashScreen(false);
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
@@ -136,7 +136,7 @@ function App() {
     };
 
     // LOG OUT
-    const logOutHandler = () => {
+    const logOutHandler = (e) => {
         setUser('');
         localStorage.clear('User');
         window.location.reload(false);
@@ -347,8 +347,8 @@ function App() {
 
     return (
         <main>
-            {smashScreen ? (
-                <SmashScreen />
+            {splashScreen ? (
+                <SplashScreen />
             ) : (
                 <>
                     {displayLogin ? (

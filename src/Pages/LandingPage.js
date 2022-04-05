@@ -16,7 +16,7 @@ function LandingPage({ logOutHandler }) {
                 <div>
                     <img src={logo} alt='logo' />
                 </div>
-                <button>
+                <button onKeyPress={logOutHandler}>
                     <FiLogOut className='logout-icon' onClick={logOutHandler} />
                 </button>
             </footer>

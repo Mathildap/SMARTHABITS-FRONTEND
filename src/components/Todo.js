@@ -10,7 +10,8 @@ function Todo() {
     let onToggle = useContext(HabitContext).onToggle;
     let onDelete = useContext(HabitContext).onDelete;
 
-    const sendTodoHandler = () => {
+    const sendTodoHandler = (e) => {
+        e.preventDefault();
         newTodo(todoName);
         document.getElementById('newTodoInput').value = '';
     };
@@ -41,7 +42,15 @@ function Todo() {
                                 >
                                     <p>{todo.todoName}</p>
                                     <div className='icon-div'>
-                                        <button>
+                                        <button
+                                            className='icon'
+                                            onKeyPress={() =>
+                                                onToggle({
+                                                    id: todo._id,
+                                                    done: todo.done,
+                                                })
+                                            }
+                                        >
                                             <BiCheck
                                                 className='icon'
                                                 onClick={() =>
@@ -52,7 +61,12 @@ function Todo() {
                                                 }
                                             />
                                         </button>
-                                        <button>
+                                        <button
+                                            className='icon'
+                                            onKeyPress={() =>
+                                                onDelete(todo._id)
+                                            }
+                                        >
                                             <BiTrash
                                                 className='icon'
                                                 onClick={() =>
@@ -64,7 +78,10 @@ function Todo() {
                                 </div>
                             ))}
                         </div>
-                        <div className='new-todo-container'>
+                        <form
+                            onSubmit={sendTodoHandler}
+                            className='new-todo-container'
+                        >
                             <input
                                 type='text'
                                 id='newTodoInput'
@@ -72,10 +89,10 @@ function Todo() {
                                 onChange={(e) => setTodoName(e.target.value)}
                                 required
                             />
-                            <button onClick={sendTodoHandler}>
+                            <button type='submit' className='icon'>
                                 <FiPlus className='plus-icon' />
                             </button>
-                        </div>
+                        </form>
                     </>
                 )}
             </article>
