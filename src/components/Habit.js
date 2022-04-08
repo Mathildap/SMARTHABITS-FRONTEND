@@ -17,17 +17,11 @@ function Habit() {
     let today = date.format(now, 'dddd').toLowerCase();
 
     // INCREASE
-    const updateHabitHandler1 = (e) => {
-        if (e.target.tagName === 'a') {
+    const updateHabitHandler = (e) => {
+        if (e.target.tagName === 'A') {
             return;
         }
         updateHabit(e.target.id);
-    };
-    const updateHabitHandler2 = (e) => {
-        if (e.target.tagName === 'a') {
-            return;
-        }
-        updateHabit(e.target.parentNode.id);
     };
 
     // EDIT
@@ -60,7 +54,7 @@ function Habit() {
 
     // SVG ANIMATION
     useEffect(() => {
-        if (habits.lenght === 0) {
+        if (habits === undefined || habits.lenght === 0) {
             gsap.to(arrowRef.current, {
                 y: '20',
                 repeat: 10,
@@ -145,7 +139,7 @@ function Habit() {
                                             <button
                                                 className='habit'
                                                 key={habit._id}
-                                                onClick={updateHabitHandler1}
+                                                onClick={updateHabitHandler}
                                                 id={habit._id}
                                             >
                                                 <div>
@@ -161,12 +155,7 @@ function Habit() {
                                                                 BGColors[i],
                                                         }}
                                                     >
-                                                        <div
-                                                            onClick={
-                                                                updateHabitHandler2
-                                                            }
-                                                            id={habit._id}
-                                                        >
+                                                        <div id={habit._id}>
                                                             <Link
                                                                 to='/edit'
                                                                 onClick={

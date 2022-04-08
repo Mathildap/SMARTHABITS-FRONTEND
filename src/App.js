@@ -199,13 +199,10 @@ function App() {
 
     // UPDATE HABIT
     const updateHabitHandler = (id) => {
-        let updateHabit = {
-            id: id,
-        };
         fetch('http://localhost:5000/habits/update', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ updateHabit }),
+            body: JSON.stringify({ id }),
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
@@ -223,11 +220,26 @@ function App() {
     };
 
     const updateHabit = (info) => {
-        setHabits((habits) => habits.filter((habit) => habit._id !== info.id));
+        // setHabits((habits) => habits.filter((habit) => habit._id !== info.id));
+        // fetch('http://localhost:5000/habits/edit', {
+        //     method: 'post',
+        //     headers: { 'Content-type': 'application/json' },
+        //     body: JSON.stringify({ info }),
+        // })
+        //     .then((resp) => resp.json())
+        //     .then((jsonRes) => {
+        //         if (jsonRes === 'error') {
+        //             console.log(jsonRes);
+        //             return;
+        //         }
+        //         setHabits((habits) => habits.concat(jsonRes));
+        //     });
+        let sendInfo = { id: info.id, update: info.update, userId: user.id };
+
         fetch('http://localhost:5000/habits/edit', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ info }),
+            body: JSON.stringify({ sendInfo }),
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
@@ -235,7 +247,7 @@ function App() {
                     console.log(jsonRes);
                     return;
                 }
-                setHabits((habits) => habits.concat(jsonRes));
+                setHabits(jsonRes);
             });
     };
 
