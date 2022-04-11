@@ -1,11 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
 
 function EditHabit({ editHabit, updateHabit, deleteHabit }) {
     let navigate = useNavigate();
-    let [habitComplete, setHabitComplete] = useState(editHabit.completed);
     let sendUpdate;
+
+    // STATES
+    let [habitComplete, setHabitComplete] = useState(editHabit.completed);
 
     const increase = () => {
         if (habitComplete <= editHabit.habitNumber - 1) {

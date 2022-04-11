@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
 
 function NewNote() {
-    let [noteTitle, setNoteTitle] = useState();
     let navigate = useNavigate();
     let sendNote = useContext(HabitContext).newNote;
 
+    // STATES
+    let [noteTitle, setNoteTitle] = useState();
+
+    // SUBMIT
     const submitHandler = () => {
         sendNote(noteTitle);
         navigate('/');

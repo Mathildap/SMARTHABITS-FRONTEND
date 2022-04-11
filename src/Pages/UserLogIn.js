@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/logo.png';
 import { auth } from '../Firebase/firebase';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import logo from '../images/logo.png';
 
 function Login({ userInfo, errorMsg, googleLogin }) {
+    let navigate = useNavigate();
+
+    // STATES
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
 
-    const emailHandler = (e) => {
-        setEmail(e.target.value.toLowerCase());
-    };
-
-    const pWordHandler = (e) => {
-        setPassword(e.target.value);
-    };
-
+    // GOOGLE LOGIN
     async function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
         try {
@@ -30,13 +26,12 @@ function Login({ userInfo, errorMsg, googleLogin }) {
         }
     }
 
+    // SEND INFO
     const sendUserInfo = (e) => {
         e.preventDefault();
         let info = { email, password };
         userInfo(info);
     };
-
-    let navigate = useNavigate();
 
     return (
         <section className='login-page'>
@@ -53,7 +48,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
                         placeholder='E-postadress'
                         id='userName'
                         className='logInField'
-                        onChange={emailHandler}
+                        onChange={(e) => setEmail(e.target.value.toLowerCase())}
                         value={email}
                         required
                     />
@@ -62,7 +57,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
                         placeholder='Lösenord'
                         id='passWord'
                         className='logInField'
-                        onChange={pWordHandler}
+                        onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         required
                     />

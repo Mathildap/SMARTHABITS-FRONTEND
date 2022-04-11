@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 
 function UserRegister({ newUserInfo, emailExist, Auth }) {
+    let navigate = useNavigate();
+
+    // STATES
     let [newUserName, setNewUserName] = useState('');
     let [newEmail, setNewEmail] = useState('');
     let [newPassword, setNewPassword] = useState('');
-    let navigate = useNavigate();
 
+    // NEW USER
     const newUserHandler = (e) => {
         e.preventDefault();
 

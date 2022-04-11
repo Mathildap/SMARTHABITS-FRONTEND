@@ -1,6 +1,5 @@
 import './css/style.css';
 import './css/normalize.css';
-import date from 'date-and-time';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -20,6 +19,7 @@ function App() {
     // - - - - - - - SMASHSCREEN - - - - - - - //
     let [splashScreen, setSplashScreen] = useState(true);
 
+    // TIMER
     useEffect(() => {
         const timer = setTimeout(() => {
             setSplashScreen(false);
@@ -405,6 +405,25 @@ function App() {
             });
     };
 
+    // DELETE NOTE
+    const deleteNote = (note) => {
+        let info = { userId: user.id, noteId: note };
+
+        fetch('http://localhost:5000/notes/delete', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setNotes(jsonRes);
+            });
+    };
+
     return (
         <main>
             {splashScreen ? (
@@ -452,6 +471,7 @@ function App() {
                                 newNote: newNote,
                                 notes: notes,
                                 notesHandler: updateNoteText,
+                                deleteNoteHandler: deleteNote,
                             }}
                         >
                             <Router>

@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi';
 function Info({ closeInfo }) {
     let editRef = useRef();
 
+    // CLICK OUTSIDE -> CLOSE INFO
     useEffect(() => {
         let handler = (event) => {
             if (!editRef.current.contains(event.target)) {

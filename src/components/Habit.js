@@ -12,7 +12,11 @@ function Habit() {
     let habits = useContext(HabitContext).habits;
     let updateHabit = useContext(HabitContext).updateHabit;
     let editHabitId = useContext(HabitContext).editHabitId;
+
+    // STATES
     let [info, setInfo] = useState(false);
+
+    // HANDLE DATE
     const now = new Date();
     let today = date.format(now, 'dddd').toLowerCase();
 
@@ -63,43 +67,24 @@ function Habit() {
         }
     });
 
-    // ENTER PRESS
-    const keyPressHandler = (e) => {
-        if (e.keyCode === 0) {
-            setInfo(true);
-        }
-    };
-
     return (
         <section className='habit-component landning-page-component'>
             {info ? <Info closeInfo={() => setInfo(false)} /> : ''}
             <header className='landning-page-component-header'>
+                <button
+                    className='icon'
+                    type='submit'
+                    onClick={() => setInfo(true)}
+                >
+                    <FiInfo className='info-icon' />
+                </button>
+                <h2>RUTINER</h2>
                 <div>
                     <button
                         className='icon'
-                        type='submit'
-                        onKeyPress={keyPressHandler}
+                        onClick={() => navigate('/newhabit')}
                     >
-                        <FiInfo
-                            className='info-icon'
-                            onClick={() => setInfo(true)}
-                        />
-                    </button>
-                </div>
-                <div>
-                    <h2>RUTINER</h2>
-                </div>
-                <div>
-                    <button
-                        className='icon'
-                        onKeyPress={(e) =>
-                            e.keyCode === 0 ? navigate('/newhabit') : ''
-                        }
-                    >
-                        <FiPlus
-                            className='plus-icon'
-                            onClick={() => navigate('/newhabit')}
-                        />
+                        <FiPlus className='plus-icon' />
                     </button>
                     {habits === undefined || habits.length === 0 ? (
                         <div className='svg-arrow' ref={arrowRef}>
@@ -157,7 +142,7 @@ function Habit() {
                                                     >
                                                         <div id={habit._id}>
                                                             <Link
-                                                                to='/edit'
+                                                                to='/edit/'
                                                                 onClick={
                                                                     editHabitHandler
                                                                 }

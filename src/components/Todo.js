@@ -4,11 +4,13 @@ import { HabitContext } from '../App';
 import { BiCheck, BiTrash } from 'react-icons/bi';
 
 function Todo() {
-    let [todoName, setTodoName] = useState();
     let newTodo = useContext(HabitContext).newTodo;
     let todos = useContext(HabitContext).todos;
     let onToggle = useContext(HabitContext).onToggle;
     let onDelete = useContext(HabitContext).onDelete;
+
+    // STATES
+    let [todoName, setTodoName] = useState();
 
     const sendTodoHandler = (e) => {
         e.preventDefault();
@@ -19,11 +21,9 @@ function Todo() {
     return (
         <section className='habit-component landning-page-component todo-component'>
             <header className='landning-page-component-header'>
-                <div></div>
-                <div>
-                    <h2>ATT GÖRA</h2>
-                </div>
-                <div></div>
+                <div />
+                <h2>ATT GÖRA</h2>
+                <div />
             </header>
             <article className='todos-page'>
                 {todos === undefined ? (
@@ -44,35 +44,20 @@ function Todo() {
                                     <div className='icon-div'>
                                         <button
                                             className='icon'
-                                            onKeyPress={() =>
+                                            onClick={() =>
                                                 onToggle({
                                                     id: todo._id,
                                                     done: todo.done,
                                                 })
                                             }
                                         >
-                                            <BiCheck
-                                                className='icon'
-                                                onClick={() =>
-                                                    onToggle({
-                                                        id: todo._id,
-                                                        done: todo.done,
-                                                    })
-                                                }
-                                            />
+                                            <BiCheck />
                                         </button>
                                         <button
                                             className='icon'
-                                            onKeyPress={() =>
-                                                onDelete(todo._id)
-                                            }
+                                            onClick={() => onDelete(todo._id)}
                                         >
-                                            <BiTrash
-                                                className='icon'
-                                                onClick={() =>
-                                                    onDelete(todo._id)
-                                                }
-                                            />
+                                            <BiTrash />
                                         </button>
                                     </div>
                                 </div>

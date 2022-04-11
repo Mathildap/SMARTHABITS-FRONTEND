@@ -4,7 +4,6 @@ import Habit from '../components/Habit';
 import Todo from '../components/Todo';
 import Notes from '../components/Notes';
 import { FiLogOut } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 
 function LandingPage({ logOutHandler }) {
     return (
@@ -13,12 +12,12 @@ function LandingPage({ logOutHandler }) {
             <Todo />
             <Notes />
             <footer>
-                <div> </div>
+                <div />
                 <div>
                     <img src={logo} alt='logo' />
                 </div>
-                <button onKeyPress={logOutHandler}>
-                    <FiLogOut className='logout-icon' onClick={logOutHandler} />
+                <button onClick={logOutHandler}>
+                    <FiLogOut className='logout-icon' />
                 </button>
             </footer>
         </section>

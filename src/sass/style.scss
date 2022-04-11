@@ -510,8 +510,7 @@ h1 {
 /* - - - - - NOTES - - - - - */
 .notes-component {
     .new-icon {
-        font-size: 25px;
-        color: $dark-grey;
+        font-size: 22px;
     }
     .note-title {
         text-transform: uppercase;
@@ -519,6 +518,11 @@ h1 {
     }
     .active-note {
         background-color: $btn-blue;
+    }
+    .icon {
+        margin: 10px;
+        font-size: 20px;
+        color: $dark-grey;
     }
     .note-text-div {
         width: 80%;
@@ -528,7 +532,7 @@ h1 {
         outline: none;
         height: auto;
         background-color: $light-grey;
-        margin: 10px 10px 10px auto;
+        margin: 10px 10px 0px auto;
         padding: 10px 20px;
         border-radius: 12px;
         border: 0;

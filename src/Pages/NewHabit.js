@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { HabitContext } from '../App';
 
 function NewHabit() {
+    let navigate = useNavigate();
+    let context = useContext(HabitContext).newHabit;
+
+    // STATES
     let [habitName, setHabitName] = useState('');
     let [habitGoal, setHabitGoal] = useState('1Idag');
     let [habitNumber, setHabitNumber] = useState();
     let [habitDays, setHabitDays] = useState([]);
     let [habitMsg, setHabitMsg] = useState();
-    let navigate = useNavigate();
-    let context = useContext(HabitContext).newHabit;
 
     const handleHabitNumber = (e) => {
         let parsedNumber = parseInt(e.target.value);
