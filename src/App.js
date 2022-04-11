@@ -13,6 +13,7 @@ import UserRegister from './Pages/UserRegister';
 import LandingPage from './Pages/LandingPage';
 import NewHabit from './Pages/NewHabit';
 import EditHabit from './Pages/EditHabit';
+import NewNote from './Pages/NewNote';
 export const HabitContext = React.createContext();
 
 function App() {
@@ -220,20 +221,6 @@ function App() {
     };
 
     const updateHabit = (info) => {
-        // setHabits((habits) => habits.filter((habit) => habit._id !== info.id));
-        // fetch('http://localhost:5000/habits/edit', {
-        //     method: 'post',
-        //     headers: { 'Content-type': 'application/json' },
-        //     body: JSON.stringify({ info }),
-        // })
-        //     .then((resp) => resp.json())
-        //     .then((jsonRes) => {
-        //         if (jsonRes === 'error') {
-        //             console.log(jsonRes);
-        //             return;
-        //         }
-        //         setHabits((habits) => habits.concat(jsonRes));
-        //     });
         let sendInfo = { id: info.id, update: info.update, userId: user.id };
 
         fetch('http://localhost:5000/habits/edit', {
@@ -357,6 +344,67 @@ function App() {
             });
     };
 
+    // - - - - - - - NOTES - - - -  - - - //
+    let [notes, setNotes] = useState();
+
+    // GET NOTES FROM DB
+    useEffect(() => {
+        fetch('http://localhost:5000/notes/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setNotes(jsonRes);
+            });
+    }, [user]);
+
+    // NEW NOTE
+    const newNote = (info) => {
+        let newNote = {
+            userId: user.id,
+            noteTitle: info,
+        };
+
+        fetch('http://localhost:5000/notes/new', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ newNote }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setNotes(jsonRes);
+            });
+    };
+
+    // UPDATE NOTE TEXT
+    const updateNoteText = (note) => {
+        let info = { userId: user.id, noteId: note.id, text: note.text };
+
+        fetch('http://localhost:5000/notes/updatetext', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setNotes(jsonRes);
+            });
+    };
+
     return (
         <main>
             {splashScreen ? (
@@ -401,6 +449,9 @@ function App() {
                                 todos: todos,
                                 onToggle: toggleTodo,
                                 onDelete: deleteTodo,
+                                newNote: newNote,
+                                notes: notes,
+                                notesHandler: updateNoteText,
                             }}
                         >
                             <Router>
@@ -426,6 +477,10 @@ function App() {
                                                 deleteHabit={deleteHabit}
                                             />
                                         }
+                                    />
+                                    <Route
+                                        path='/newnote'
+                                        element={<NewNote />}
                                     />
                                     <Route path='*' element={<Page404 />} />
                                 </Routes>

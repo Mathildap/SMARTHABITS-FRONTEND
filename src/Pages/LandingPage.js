@@ -4,6 +4,7 @@ import Habit from '../components/Habit';
 import Todo from '../components/Todo';
 import Notes from '../components/Notes';
 import { FiLogOut } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 function LandingPage({ logOutHandler }) {
     return (

@@ -184,7 +184,7 @@ h1 {
     .landning-page-component-header {
         display: flex;
         justify-content: space-between;
-        align-items: top;
+        align-items: center;
         margin-top: 10px;
     }
     h2 {
@@ -504,6 +504,37 @@ h1 {
             padding-left: 10px;
             bottom: 0;
         }
+    }
+}
+
+/* - - - - - NOTES - - - - - */
+.notes-component {
+    .new-icon {
+        font-size: 25px;
+        color: $dark-grey;
+    }
+    .note-title {
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+    .active-note {
+        background-color: $btn-blue;
+    }
+    .note-text-div {
+        width: 80%;
+        min-height: 40px;
+        resize: none;
+        overflow: show;
+        outline: none;
+        height: auto;
+        background-color: $light-grey;
+        margin: 10px 10px 10px auto;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
 
