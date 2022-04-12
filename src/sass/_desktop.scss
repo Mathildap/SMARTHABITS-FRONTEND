@@ -1,0 +1,15 @@
+.components-container {
+    display: flex;
+    .landning-page-component {
+        width: 33%;
+    }
+}
+.new-habit-page {
+    max-width: 550px;
+    border: 2px solid $medium-grey;
+    border-radius: 10px;
+    margin: 7px auto;
+}
+.info-container {
+    width: 50%;
+}

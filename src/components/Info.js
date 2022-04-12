@@ -21,11 +21,8 @@ function Info({ closeInfo }) {
 
     return (
         <div className='info-container' ref={editRef}>
-            <button
-                onClick={() => closeInfo('')}
-                onKeyPress={() => closeInfo('')}
-            >
-                <FiX className='close-icon' />
+            <button className='btn-icon' onClick={() => closeInfo('')}>
+                <FiX className='react-icon' />
             </button>
             <p>
                 Tracka dina rutiner, skriv att-göra listor och anteckna allt

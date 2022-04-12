@@ -50,11 +50,14 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
                         </div>
                     </header>
                     <article className='edit-habit-container'>
-                        <div className='header-icon'>
-                            <span></span>
+                        <div className='header'>
+                            <div />
                             <h4>{editHabit.habitName}</h4>
-                            <button onClick={deleteHabitHandler}>
-                                <FiTrash2 className='trash-icon' />
+                            <button
+                                className='btn-icon'
+                                onClick={deleteHabitHandler}
+                            >
+                                <FiTrash2 className='react-icon' />
                             </button>
                         </div>
                         <p>{editHabit.habitMsg}</p>
@@ -63,11 +66,11 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
                                 {habitComplete}/{editHabit.habitNumber}
                             </p>
                             <div>
-                                <button onClick={decrease}>
-                                    <FiMinus className='count-icon' />
+                                <button className='btn-icon' onClick={decrease}>
+                                    <FiMinus className='react-icon' />
                                 </button>
-                                <button onClick={increase}>
-                                    <FiPlus className='count-icon' />
+                                <button className='btn-icon' onClick={increase}>
+                                    <FiPlus className='react-icon' />
                                 </button>
                             </div>
                         </div>

@@ -1,0 +1,569 @@
+$default-font: 'Raleway', sans-serif;
+$default-color: #313131;
+$btn-blue: #c1d8ff;
+$btn-hover-blue: rgba(193, 216, 255, 0.3);
+$light-grey: #f7f7f7;
+$medium-grey: #ededed;
+$dark-grey: #474747;
+$almost-black: #525252;
+
+/* - - - - - GENERAL - - - - - */
+body {
+    height: 100vh;
+    font-family: $default-font;
+    color: $default-color;
+}
+main {
+    position: relative;
+}
+h1 {
+    font-weight: lighter;
+    letter-spacing: 1.7px;
+    color: #313131;
+}
+.react-icon {
+    font-size: 30px;
+    color: $dark-grey;
+}
+.btn-icon {
+    background: 0;
+    border: 0;
+}
+
+/* - - - - - SMASH SCREEN - - - - - */
+.smash-screen-page {
+    text-align: center;
+
+    img {
+        position: relative;
+        top: 257px;
+        width: 128px;
+        height: 128px;
+    }
+    h1 {
+        position: relative;
+        top: 273px;
+    }
+}
+
+/* - - - - - USER LOGIN - - - - - */
+.login-page {
+    max-width: 500px;
+    margin: 0 auto;
+    .login-page-logo {
+        text-align: center;
+        margin-top: 60px;
+    }
+    form {
+        margin-top: 50px;
+    }
+    input,
+    .login-btn {
+        display: block;
+        width: 70%;
+        height: 45px;
+        margin: 13px auto 0px auto;
+        border-radius: 10px;
+        border: 0;
+        background-color: $light-grey;
+        letter-spacing: 0.8px;
+        cursor: pointer;
+        padding-left: 10px;
+    }
+    .login-btn {
+        background-color: $btn-blue;
+        text-transform: uppercase;
+        padding: 0;
+        color: $default-color;
+
+        &:hover {
+            background-color: $btn-hover-blue;
+        }
+    }
+    .btn-link {
+        display: block;
+        background-color: white;
+        font-size: 0.8rem;
+        border: 0;
+        width: 70%;
+        text-align: left;
+        margin: 5px auto;
+        color: $default-color;
+
+        &:hover {
+            color: #fa739d;
+        }
+    }
+    .span-bold {
+        font-weight: 500;
+        cursor: pointer;
+    }
+    #errorMsg {
+        text-align: center;
+    }
+    hr {
+        width: 70%;
+        margin-top: 40px;
+        outline: 0;
+        border: 0;
+        border-top: 2px solid $medium-grey;
+    }
+    h4 {
+        text-align: center;
+        font-weight: 400;
+        font-size: 1.3rem;
+    }
+    .google-btn {
+        margin: 20px auto;
+        padding: 0;
+        width: 220px;
+        height: 50px;
+        background-color: $light-grey;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .google-icon-wrapper {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .google-icon {
+            width: 25px;
+            height: 25px;
+        }
+        .btn-text {
+            margin-left: 60px;
+            font-size: 0.9rem;
+            letter-spacing: 0.2px;
+        }
+        &:hover {
+            background-color: $medium-grey;
+        }
+        &:active {
+            background: black;
+        }
+    }
+}
+
+/* - - - - - LANDING PAGE - - - - - */
+.landing-page {
+    footer {
+        bottom: 5px;
+        margin-top: 15px;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button,
+        div {
+            width: 25%;
+            text-align: center;
+        }
+        img {
+            width: 70px;
+        }
+    }
+}
+
+.landning-page-component {
+    border: 2px solid $medium-grey;
+    border-radius: 10px;
+    margin: 7px;
+    min-height: 250px;
+    padding: 20px;
+
+    .landning-page-component-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+    h2 {
+        font-weight: 400;
+        margin: 0;
+    }
+    .svg-arrow {
+        text-align: center;
+    }
+    button {
+        border: 0;
+    }
+}
+
+/* - - - - - HABITS - - - - - */
+.habit {
+    display: block;
+    text-align: left;
+    width: 95%;
+    height: 70px;
+    background-color: $medium-grey;
+    margin: 20px auto;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0;
+
+    a {
+        font-size: 1.2rem;
+        margin: 10px 0px 0px 20px;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        display: inline-block;
+        text-decoration: none;
+    }
+    p {
+        margin: 10px 0px 20px 20px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: $dark-grey;
+        font-weight: 500;
+        white-space: nowrap;
+        display: inline-block;
+    }
+    .check-icon {
+        font-size: 40px;
+        margin-right: 20px;
+        position: relative;
+        z-index: 10;
+    }
+    .habit-not-comp {
+        color: white;
+    }
+    .habit-comp {
+        color: $dark-grey;
+    }
+    .colored-div {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-radius: 12px;
+    }
+}
+
+/* - - - - - NEW HABIT PAGE - - - - - */
+.new-habit-page,
+.edit-page {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10vh;
+        padding-top: 10px;
+        margin-bottom: 25px;
+
+        h2 {
+            font-weight: normal;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+            color: $default-color;
+            font-size: 2rem;
+            width: 50%;
+            text-align: center;
+        }
+        .buttons {
+            width: 50%;
+
+            button {
+                border: 0;
+                border-radius: 9px;
+                font-family: $default-font;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: $default-color;
+                width: 100px;
+                height: 30px;
+                margin: 0 5px;
+
+                &:first-of-type {
+                    background-color: $medium-grey;
+                }
+                &:last-of-type {
+                    background-color: $btn-blue;
+                }
+            }
+        }
+    }
+
+    .habit-container {
+        text-transform: uppercase;
+        margin-left: 30px;
+        margin-bottom: 30px;
+
+        & p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        & .habitname-label {
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    .input-field {
+        border: 0;
+        border-radius: 15px;
+        background-color: $medium-grey;
+        padding: 15px;
+        width: 70%;
+    }
+    .radio {
+        display: inline-flex;
+
+        .radio__input {
+            display: none;
+
+            &:checked + .radio__label {
+                background-color: #c3c3c3;
+            }
+        }
+        .radio__label {
+            margin: 5px;
+            padding: 7px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+    }
+    .checkbox {
+        display: inline-flex;
+
+        .checkbox__input {
+            display: none;
+
+            &:checked + .checkbox__label {
+                background-color: #c3c3c3;
+            }
+        }
+        .checkbox__label {
+            margin: 5px;
+            padding: 7px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+    }
+    .checkbox-day {
+        display: inline-flex;
+
+        .checkbox-day__input {
+            display: none;
+
+            &:checked + .checkbox-day__label {
+                background-color: #c3c3c3;
+            }
+        }
+        .checkbox-day__label {
+            margin: 0px 5px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+    }
+    #habit-day-info {
+        font-size: 0.7rem;
+        font-style: italic;
+        text-transform: none;
+        letter-spacing: 0.2px;
+        color: $dark-grey;
+    }
+    .msg-field {
+        resize: none;
+    }
+}
+
+/* - - - - - EDIT HABIT PAGE - - - - - */
+.edit-page {
+    .edit-habit-container {
+        width: 90%;
+        margin: 10px auto;
+        background-color: $btn-blue;
+        border-radius: 12px;
+
+        .header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            div {
+                width: 10%;
+            }
+        }
+        h4 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: white;
+            text-align: center;
+            width: 60%;
+            margin: 15px;
+        }
+        p {
+            text-align: center;
+        }
+    }
+    .edit-count-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 10px;
+        p {
+            font-size: 1.4rem;
+            margin: 10px 20px;
+        }
+    }
+}
+
+/* - - - - - TODO - - - - - */
+.todo-component {
+    position: relative;
+
+    .todo-div {
+        width: 95%;
+        height: 50px;
+        background-color: $light-grey;
+        margin: 10px auto;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+            margin-left: 20px;
+            color: $dark-grey;
+        }
+        .icon-div {
+            display: flex;
+            align-items: center;
+        }
+        .todo-icon {
+            font-size: 23px;
+            margin-right: 10px;
+        }
+    }
+    .reminder {
+        text-decoration: line-through;
+    }
+    .new-todo-container {
+        width: 100%;
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+
+        input {
+            width: 83%;
+            height: 40px;
+            background-color: $medium-grey;
+            border-radius: 12px;
+            border: 0;
+            padding-left: 10px;
+            bottom: 0;
+        }
+    }
+}
+
+/* - - - - - NOTES - - - - - */
+.notes-component {
+    .new-icon {
+        font-size: 25px;
+    }
+    .note-title {
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+    .active-note {
+        background-color: $btn-blue;
+    }
+    .note-text-div {
+        width: 80%;
+        min-height: 40px;
+        resize: none;
+        overflow: show;
+        outline: none;
+        height: auto;
+        background-color: $light-grey;
+        margin: 10px 10px 0px auto;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* - - - - - 404 PAGE - - - - - */
+.error-page {
+    text-align: center;
+
+    h2 {
+        font-weight: 500;
+        text-align: center;
+    }
+    button {
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: $btn-blue;
+        text-transform: uppercase;
+        border: 0;
+    }
+    img {
+        width: 60px;
+        margin-top: 20px;
+    }
+}
+
+/* - - - - - INFO - - - - - */
+.info-container {
+    position: fixed;
+    top: 28%;
+    left: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80%;
+    display: inline-block;
+    margin: 0 15%;
+    z-index: 99;
+    border-radius: 10px;
+    border: 1px solid $dark-grey;
+    background-image: linear-gradient(to bottom, #c1d8ff, #f5f9ff);
+    font-size: 1.1rem;
+    line-height: 1.5;
+
+    p {
+        margin: 30px 20px;
+    }
+    button {
+        tabindex: 1;
+        position: absolute;
+        right: 10px;
+        font-size: 25px;
+        padding: 10px;
+    }
+}

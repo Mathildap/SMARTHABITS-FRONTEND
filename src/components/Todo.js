@@ -43,7 +43,7 @@ function Todo() {
                                     <p>{todo.todoName}</p>
                                     <div className='icon-div'>
                                         <button
-                                            className='icon'
+                                            className='btn-icon'
                                             onClick={() =>
                                                 onToggle({
                                                     id: todo._id,
@@ -51,13 +51,13 @@ function Todo() {
                                                 })
                                             }
                                         >
-                                            <BiCheck />
+                                            <BiCheck className='react-icon' />
                                         </button>
                                         <button
-                                            className='icon'
+                                            className='btn-icon'
                                             onClick={() => onDelete(todo._id)}
                                         >
-                                            <BiTrash />
+                                            <BiTrash className='react-icon todo-icon' />
                                         </button>
                                     </div>
                                 </div>
@@ -74,8 +74,8 @@ function Todo() {
                                 onChange={(e) => setTodoName(e.target.value)}
                                 required
                             />
-                            <button type='submit' className='icon'>
-                                <FiPlus className='plus-icon' />
+                            <button type='submit' className='btn-icon'>
+                                <FiPlus className='react-icon' />
                             </button>
                         </form>
                     </>

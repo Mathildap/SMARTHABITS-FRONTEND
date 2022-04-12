@@ -49,11 +49,41 @@ function Habit() {
 
     // COLORS
     let BGColors = [
-        'linear-gradient(0deg, rgba(207,196,253,1) 5%, rgba(129,100,255,1) 100%)',
-        'linear-gradient(0deg, rgba(255,211,221,1) 5%, rgba(248,72,113,1) 100%)',
-        'linear-gradient(0deg, rgba(152,216,204,1) 10%, rgba(38,175,112,1) 100%)',
-        'linear-gradient(0deg, rgba(255,234,229,1) 5%, rgba(229,116,87,1) 100%)',
-        'linear-gradient(0deg, rgba(198,202,255,1) 5%, rgba(86,98,230,1) 100%)',
+        'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
+
+        'linear-gradient(0deg, rgba(144,223,176,1) 5%, rgba(30,153,98,1) 100%)',
+        'linear-gradient(0deg, rgba(252,184,124,1) 5%, rgba(231,99,75,1) 100%)',
+        'linear-gradient(0deg, rgba(106,203,224,0.5) 5%, rgba(87,104,234,1) 100%)',
+        'linear-gradient(0deg, rgba(253,173,189,1) 5%, rgba(245,11,154,1) 100%)',
+        'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
+
+        'linear-gradient(0deg, rgba(144,223,176,1) 5%, rgba(30,153,98,1) 100%)',
+        'linear-gradient(0deg, rgba(252,184,124,1) 5%, rgba(231,99,75,1) 100%)',
+        'linear-gradient(0deg, rgba(106,203,224,0.5) 5%, rgba(87,104,234,1) 100%)',
+        'linear-gradient(0deg, rgba(253,173,189,1) 5%, rgba(245,11,154,1) 100%)',
+        'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
+
+        'linear-gradient(0deg, rgba(144,223,176,1) 5%, rgba(30,153,98,1) 100%)',
+        'linear-gradient(0deg, rgba(252,184,124,1) 5%, rgba(231,99,75,1) 100%)',
+        'linear-gradient(0deg, rgba(106,203,224,0.5) 5%, rgba(87,104,234,1) 100%)',
+        'linear-gradient(0deg, rgba(253,173,189,1) 5%, rgba(245,11,154,1) 100%)',
+        'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
+
+        'linear-gradient(0deg, rgba(144,223,176,1) 5%, rgba(30,153,98,1) 100%)',
+        'linear-gradient(0deg, rgba(252,184,124,1) 5%, rgba(231,99,75,1) 100%)',
+        'linear-gradient(0deg, rgba(106,203,224,0.5) 5%, rgba(87,104,234,1) 100%)',
+        'linear-gradient(0deg, rgba(253,173,189,1) 5%, rgba(245,11,154,1) 100%)',
+        'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
+        'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
+
+        'linear-gradient(0deg, rgba(144,223,176,1) 5%, rgba(30,153,98,1) 100%)',
+        'linear-gradient(0deg, rgba(252,184,124,1) 5%, rgba(231,99,75,1) 100%)',
+        'linear-gradient(0deg, rgba(106,203,224,0.5) 5%, rgba(87,104,234,1) 100%)',
+        'linear-gradient(0deg, rgba(253,173,189,1) 5%, rgba(245,11,154,1) 100%)',
     ];
 
     // SVG ANIMATION
@@ -72,19 +102,19 @@ function Habit() {
             {info ? <Info closeInfo={() => setInfo(false)} /> : ''}
             <header className='landning-page-component-header'>
                 <button
-                    className='icon'
+                    className='btn-icon'
                     type='submit'
                     onClick={() => setInfo(true)}
                 >
-                    <FiInfo className='info-icon' />
+                    <FiInfo className='info-icon react-icon' />
                 </button>
                 <h2>RUTINER</h2>
                 <div>
                     <button
-                        className='icon'
+                        className='btn-icon'
                         onClick={() => navigate('/newhabit')}
                     >
-                        <FiPlus className='plus-icon' />
+                        <FiPlus className='plus-icon react-icon' />
                     </button>
                     {habits === undefined || habits.length === 0 ? (
                         <div className='svg-arrow' ref={arrowRef}>

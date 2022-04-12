@@ -8,16 +8,18 @@ import { FiLogOut } from 'react-icons/fi';
 function LandingPage({ logOutHandler }) {
     return (
         <section className='landing-page'>
-            <Habit />
-            <Todo />
-            <Notes />
+            <article className='components-container'>
+                <Habit />
+                <Todo />
+                <Notes />
+            </article>
             <footer>
                 <div />
                 <div>
                     <img src={logo} alt='logo' />
                 </div>
-                <button onClick={logOutHandler}>
-                    <FiLogOut className='logout-icon' />
+                <button className='btn-icon' onClick={logOutHandler}>
+                    <FiLogOut className='react-icon' />
                 </button>
             </footer>
         </section>

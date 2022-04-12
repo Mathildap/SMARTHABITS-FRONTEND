@@ -23,7 +23,7 @@ function App() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setSplashScreen(false);
-        }, 2000);
+        }, 1200);
         return () => clearTimeout(timer);
     }, []);
 
@@ -200,10 +200,12 @@ function App() {
 
     // UPDATE HABIT
     const updateHabitHandler = (id) => {
+        let info = { id: id, userId: user.id };
+
         fetch('http://localhost:5000/habits/update', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ id }),
+            body: JSON.stringify({ info }),
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {

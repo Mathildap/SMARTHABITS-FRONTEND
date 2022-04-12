@@ -49,8 +49,11 @@ function Notes() {
             <header className='landning-page-component-header'>
                 <div></div>
                 <h2>ANTECKNINGAR</h2>
-                <button className='icon' onClick={() => navigate('/newnote')}>
-                    <FiEdit className='new-icon' />
+                <button
+                    className='btn-icon'
+                    onClick={() => navigate('/newnote')}
+                >
+                    <FiEdit className='react-icon new-icon' />
                 </button>
             </header>
 
@@ -82,7 +85,7 @@ function Notes() {
                                     {toggleText === note._id ? (
                                         <button
                                             onClick={() => onDelete(note._id)}
-                                            className='icon delete'
+                                            className='btn-icon delete'
                                         >
                                             <BiTrash />
                                         </button>
