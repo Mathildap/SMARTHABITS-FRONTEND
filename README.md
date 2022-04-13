@@ -76,3 +76,5 @@ To run this project, you will need to add the following environment variables to
 `DB_CONNECT`
 
 `USER_KEY`
+
+`JWT_KEY`

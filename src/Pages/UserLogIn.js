@@ -37,7 +37,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
         <section className='login-page'>
             <article className='login-page-logo'>
                 <div>
-                    <img src={logo} alt='logo' />
+                    <img src={logo} alt='smarthabits logga' width={100} />
                 </div>
                 <h1>SMARTHABITS</h1>
             </article>

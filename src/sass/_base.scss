@@ -9,7 +9,7 @@ $almost-black: #525252;
 
 /* - - - - - GENERAL - - - - - */
 body {
-    height: 100vh;
+    height: 90vh;
     font-family: $default-font;
     color: $default-color;
 }
@@ -167,6 +167,9 @@ h1 {
             width: 25%;
             text-align: center;
         }
+        button {
+            cursor: pointer;
+        }
         img {
             width: 70px;
         }
@@ -195,6 +198,7 @@ h1 {
     }
     button {
         border: 0;
+        cursor: pointer;
     }
 }
 
@@ -203,7 +207,7 @@ h1 {
     display: block;
     text-align: left;
     width: 95%;
-    height: 70px;
+    height: 65px;
     background-color: $medium-grey;
     margin: 20px auto;
     border-radius: 12px;
@@ -214,7 +218,7 @@ h1 {
     padding: 0;
 
     a {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin: 10px 0px 0px 20px;
         text-transform: uppercase;
         font-weight: 500;
@@ -268,7 +272,7 @@ h1 {
             letter-spacing: 1.7px;
             text-transform: uppercase;
             color: $default-color;
-            font-size: 2rem;
+            font-size: 1.5rem;
             width: 50%;
             text-align: center;
         }
@@ -286,6 +290,7 @@ h1 {
                 width: 100px;
                 height: 30px;
                 margin: 0 5px;
+                cursor: pointer;
 
                 &:first-of-type {
                     background-color: $medium-grey;
@@ -300,14 +305,14 @@ h1 {
     .habit-container {
         text-transform: uppercase;
         margin-left: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
 
         & p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-bottom: 10px;
         }
         & .habitname-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             display: block;
             margin-bottom: 10px;
         }
@@ -316,7 +321,7 @@ h1 {
         border: 0;
         border-radius: 15px;
         background-color: $medium-grey;
-        padding: 15px;
+        padding: 12px;
         width: 70%;
     }
     .radio {
@@ -530,6 +535,7 @@ h1 {
         background-color: $btn-blue;
         text-transform: uppercase;
         border: 0;
+        cursor: pointer;
     }
     img {
         margin-top: 20px;
@@ -548,7 +554,7 @@ h1 {
     margin: 0 15%;
     z-index: 99;
     border-radius: 10px;
-    border: 1px solid $dark-grey;
+    border: 1px solid white;
     background-image: linear-gradient(to bottom, #c1d8ff, #f5f9ff);
     font-size: 1.1rem;
     line-height: 1.5;
