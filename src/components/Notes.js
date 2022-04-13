@@ -51,7 +51,7 @@ function Notes() {
                 <h2>ANTECKNINGAR</h2>
                 <button
                     className='btn-icon'
-                    onClick={() => navigate('/newnote')}
+                    onClick={() => navigate('/nyanteckning')}
                 >
                     <FiEdit className='react-icon new-icon' />
                 </button>

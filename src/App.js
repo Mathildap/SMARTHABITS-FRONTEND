@@ -465,7 +465,7 @@ function App() {
                                     }
                                 />
                                 <Route
-                                    path='/register'
+                                    path='/registrera'
                                     element={
                                         <UserRegister
                                             emailExist={emailExist}
@@ -505,11 +505,11 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/newhabit'
+                                        path='/nyrutin'
                                         element={<NewHabit />}
                                     />
                                     <Route
-                                        path='/edit/:habitId'
+                                        path='/rutin/:habitId'
                                         element={
                                             <EditHabit
                                                 editHabit={editHabit}
@@ -520,7 +520,7 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/newnote'
+                                        path='/nyanteckning'
                                         element={<NewNote />}
                                     />
                                     <Route path='*' element={<Page404 />} />

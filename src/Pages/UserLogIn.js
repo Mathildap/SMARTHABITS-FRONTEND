@@ -71,7 +71,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
                     </button>
                     <button
                         className='btn-link'
-                        onClick={() => navigate('/register')}
+                        onClick={() => navigate('/registrera')}
                         id='signUp'
                     >
                         Ny här? <span className='span-bold'>Skapa konto</span>

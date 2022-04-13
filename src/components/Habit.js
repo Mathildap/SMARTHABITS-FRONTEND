@@ -35,10 +35,10 @@ function Habit() {
         for (let habit in habits) {
             if (habits[habit]._id === id) {
                 habitInfo = habits[habit];
+                navigate('/rutin/' + habits[habit]._id);
             }
         }
         editHabitId(habitInfo);
-        navigate('/edit/');
     };
 
     // COLOR DIV
@@ -112,7 +112,7 @@ function Habit() {
                 <div>
                     <button
                         className='btn-icon'
-                        onClick={() => navigate('/newhabit')}
+                        onClick={() => navigate('/nyrutin')}
                     >
                         <FiPlus className='plus-icon react-icon' />
                     </button>
@@ -173,7 +173,7 @@ function Habit() {
                                                         <div id={habit._id}>
                                                             <Link
                                                                 to={
-                                                                    '/edit/' +
+                                                                    '/rutin/' +
                                                                     habit._id
                                                                 }
                                                                 onClick={
