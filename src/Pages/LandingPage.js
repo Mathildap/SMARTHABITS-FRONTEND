@@ -16,7 +16,7 @@ function LandingPage({ logOutHandler }) {
             <footer>
                 <div />
                 <div>
-                    <img src={logo} alt='logo' />
+                    <img src={logo} alt='smarthabits logga' width={75} />
                 </div>
                 <button className='btn-icon' onClick={logOutHandler}>
                     <FiLogOut className='react-icon' />

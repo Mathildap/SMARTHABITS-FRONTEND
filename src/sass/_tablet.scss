@@ -1,5 +1,7 @@
-.new-habit-page {
+.new-habit-page,
+.edit-page {
     max-width: 550px;
+    min-height: 80vh;
     border: 2px solid $medium-grey;
     border-radius: 10px;
     margin: 7px auto;

@@ -10,7 +10,7 @@ function Page404() {
             <h2>OOPS, nu har du hamnat fel!</h2>
             <button onClick={() => navigate('/')}>Ta mig tillbaka</button>
             <div>
-                <img src={logo} alt='logo' />
+                <img src={logo} alt='smarthabits logga' width={75} />
             </div>
         </section>
     );

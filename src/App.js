@@ -240,6 +240,24 @@ function App() {
             });
     };
 
+    const idReload = (habitId) => {
+        if (editHabit === undefined) {
+            fetch('http://localhost:5000/habits/edit/' + habitId, {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user: user.id }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setEditHabit(jsonRes);
+                });
+        }
+    };
+
     // DELETE HABIT
     const deleteHabit = (i) => {
         let info = { userId: user.id, id: i };
@@ -491,12 +509,13 @@ function App() {
                                         element={<NewHabit />}
                                     />
                                     <Route
-                                        path='/edit/'
+                                        path='/edit/:habitId'
                                         element={
                                             <EditHabit
                                                 editHabit={editHabit}
                                                 updateHabit={updateHabit}
                                                 deleteHabit={deleteHabit}
+                                                idReload={idReload}
                                             />
                                         }
                                     />

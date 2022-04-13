@@ -172,7 +172,10 @@ function Habit() {
                                                     >
                                                         <div id={habit._id}>
                                                             <Link
-                                                                to='/edit/'
+                                                                to={
+                                                                    '/edit/' +
+                                                                    habit._id
+                                                                }
                                                                 onClick={
                                                                     editHabitHandler
                                                                 }
@@ -182,7 +185,7 @@ function Habit() {
                                                                             habit.habitNumber >
                                                                         0
                                                                             ? 'white'
-                                                                            : '',
+                                                                            : '#474747',
                                                                 }}
                                                             >
                                                                 {

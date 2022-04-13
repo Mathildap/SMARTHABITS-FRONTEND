@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
 
-function EditHabit({ editHabit, updateHabit, deleteHabit }) {
+function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
     let navigate = useNavigate();
+    let { habitId } = useParams();
     let sendUpdate;
 
     // STATES
-    let [habitComplete, setHabitComplete] = useState(editHabit.completed);
+    let [habitComplete, setHabitComplete] = useState(
+        editHabit && editHabit.completed
+    );
+
+    useEffect(() => {
+        if (editHabit === undefined) {
+            idReload(habitId);
+        }
+    }, []);
 
     const increase = () => {
         if (habitComplete <= editHabit.habitNumber - 1) {
@@ -31,6 +40,14 @@ function EditHabit({ editHabit, updateHabit, deleteHabit }) {
         deleteHabit(editHabit._id);
         navigate('/');
     };
+
+    useEffect(() => {
+        if (editHabit === undefined) {
+            console.log('vänta');
+        } else {
+            setHabitComplete(editHabit.completed);
+        }
+    }, []);
 
     return (
         <>
