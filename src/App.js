@@ -356,7 +356,7 @@ function App() {
     const deleteTodo = (info) => {
         let todo = { id: info, userId: user.id };
 
-        fetch('hhttps://smarthabits-mathildap.herokuapp.com/todos/delete', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/todos/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ todo }),
@@ -481,10 +481,7 @@ function App() {
                                         />
                                     }
                                 />
-                                <Route
-                                    path='/SMARTHABITS-FRONTEND/*'
-                                    element={<Page404 />}
-                                />
+                                <Route path='/*' element={<Page404 />} />
                             </Routes>
                         </Router>
                     ) : (
@@ -533,10 +530,7 @@ function App() {
                                         path='/SMARTHABITS-FRONTEND/nyanteckning'
                                         element={<NewNote />}
                                     />
-                                    <Route
-                                        path='/SMARTHABITS-FRONTEND/*'
-                                        element={<Page404 />}
-                                    />
+                                    <Route path='/*' element={<Page404 />} />
                                 </Routes>
                             </Router>
                         </HabitContext.Provider>
