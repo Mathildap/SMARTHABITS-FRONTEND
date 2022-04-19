@@ -480,7 +480,10 @@ function App() {
                                         />
                                     }
                                 />
-                                <Route path='*' element={<Page404 />} />
+                                <Route
+                                    path='/SMARTHABITS-FRONTEND/*'
+                                    element={<Page404 />}
+                                />
                             </Routes>
                         </Router>
                     ) : (
@@ -529,7 +532,10 @@ function App() {
                                         path='/SMARTHABITS-FRONTEND/nyanteckning'
                                         element={<NewNote />}
                                     />
-                                    <Route path='*' element={<Page404 />} />
+                                    <Route
+                                        path='/SMARTHABITS-FRONTEND/*'
+                                        element={<Page404 />}
+                                    />
                                 </Routes>
                             </Router>
                         </HabitContext.Provider>
