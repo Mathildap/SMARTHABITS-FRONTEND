@@ -24,7 +24,7 @@ function UserRegister({ newUserInfo, emailExist, Auth }) {
     };
 
     useEffect(() => {
-        if (Auth === true) navigate('/SMARTHABITS-FRONTEND');
+        if (Auth === true) navigate('/');
     });
 
     return (
@@ -76,7 +76,7 @@ function UserRegister({ newUserInfo, emailExist, Auth }) {
                     </button>
                     <button
                         className='btn-link'
-                        onClick={() => navigate('/SMARTHABITS-FRONTEND')}
+                        onClick={() => navigate('/')}
                         id='signUp'
                     >
                         Har du redan ett konto?{' '}

@@ -12,7 +12,7 @@ function NewNote() {
     // SEND TO APP.JS AND NAVIGATE BACK
     const submitHandler = () => {
         sendNote(noteTitle);
-        navigate('/SMARTHABITS-FRONTEND/');
+        navigate('/');
     };
 
     return (
@@ -20,9 +20,7 @@ function NewNote() {
             <header>
                 <h2>Skapa ny</h2>
                 <div className='buttons'>
-                    <button onClick={() => navigate('/SMARTHABITS-FRONTEND/')}>
-                        Tillbaka
-                    </button>
+                    <button onClick={() => navigate('/')}>Tillbaka</button>
                     <button onClick={submitHandler}>Spara</button>
                 </div>
             </header>

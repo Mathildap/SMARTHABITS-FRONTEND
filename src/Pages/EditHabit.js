@@ -37,13 +37,13 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
     const sendUpdateHandler = () => {
         sendUpdate = { id: editHabit._id, update: habitComplete };
         updateHabit(sendUpdate);
-        navigate('/SMARTHABITS-FRONTEND/');
+        navigate('/');
     };
 
     // SEND ID TO BD AND NAVIGATE BACK
     const deleteHabitHandler = () => {
         deleteHabit(editHabit._id);
-        navigate('/SMARTHABITS-FRONTEND/');
+        navigate('/');
     };
 
     // BUG WITH COMPLETED NUMBER WHEN REFRESH PAGE
@@ -64,11 +64,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
                     <header>
                         <h2>Redigera</h2>
                         <div className='buttons'>
-                            <button
-                                onClick={() =>
-                                    navigate('/SMARTHABITS-FRONTEND/')
-                                }
-                            >
+                            <button onClick={() => navigate('/')}>
                                 Tillbaka
                             </button>
                             <button type='submit' onClick={sendUpdateHandler}>

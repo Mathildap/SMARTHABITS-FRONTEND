@@ -8,9 +8,7 @@ function Page404() {
     return (
         <section className='error-page'>
             <h2>OOPS, nu har du hamnat fel!</h2>
-            <button onClick={() => navigate('/SMARTHABITS-FRONTEND')}>
-                Ta mig tillbaka
-            </button>
+            <button onClick={() => navigate('/')}>Ta mig tillbaka</button>
             <div>
                 <img src={logo} alt='smarthabits logga' width={75} />
             </div>

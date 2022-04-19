@@ -71,9 +71,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
                     </button>
                     <button
                         className='btn-link'
-                        onClick={() =>
-                            navigate('/SMARTHABITS-FRONTEND/registrera')
-                        }
+                        onClick={() => navigate('/registrera')}
                         id='signUp'
                     >
                         Ny här? <span className='span-bold'>Skapa konto</span>

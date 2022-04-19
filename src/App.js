@@ -466,7 +466,7 @@ function App() {
                             <Routes>
                                 <Route
                                     exact
-                                    path='/SMARTHABITS-FRONTEND'
+                                    path='/'
                                     element={
                                         <UserLogIn
                                             userInfo={userInfo}
@@ -476,7 +476,7 @@ function App() {
                                     }
                                 />
                                 <Route
-                                    path='/SMARTHABITS-FRONTEND/registrera'
+                                    path='/registrera'
                                     element={
                                         <UserRegister
                                             emailExist={emailExist}
@@ -485,18 +485,10 @@ function App() {
                                         />
                                     }
                                 />
-                                <Route
-                                    path='/SMARTHABITS-FRONTEND/404'
-                                    element={<Page404 />}
-                                />
+                                <Route path='/404' element={<Page404 />} />
                                 <Route
                                     path='*'
-                                    element={
-                                        <Navigate
-                                            replace
-                                            to='SMARTHABITS-FRONTEND/404'
-                                        />
-                                    }
+                                    element={<Navigate replace to='/404' />}
                                 />
                             </Routes>
                         </Router>
@@ -520,7 +512,7 @@ function App() {
                             <Router>
                                 <Routes>
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND'
+                                        path='/'
                                         element={
                                             <LandingPage
                                                 logOutHandler={logOutHandler}
@@ -528,11 +520,11 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND/nyrutin'
+                                        path='/nyrutin'
                                         element={<NewHabit />}
                                     />
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND/rutin/:habitId'
+                                        path='/rutin/:habitId'
                                         element={
                                             <EditHabit
                                                 editHabit={editHabit}
@@ -543,12 +535,13 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND/nyanteckning'
+                                        path='/nyanteckning'
                                         element={<NewNote />}
                                     />
+                                    <Route path='/404' element={<Page404 />} />
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND/*'
-                                        element={<Page404 />}
+                                        path='*'
+                                        element={<Navigate replace to='/404' />}
                                     />
                                 </Routes>
                             </Router>
