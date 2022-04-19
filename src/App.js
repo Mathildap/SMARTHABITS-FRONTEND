@@ -156,21 +156,19 @@ function App() {
 
     // GET HABITS FROM DB
     useEffect(() => {
-        if (localStorage.getItem('User')) {
-            fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ user }),
-            })
-                .then((resp) => resp.json())
-                .then((jsonRes) => {
-                    if (jsonRes === 'error') {
-                        console.log(jsonRes);
-                        return;
-                    }
-                    setHabits(jsonRes);
-                });
-        }
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setHabits(jsonRes);
+            });
     }, [user]);
 
     // NEW HABIT
@@ -290,21 +288,19 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        if (localStorage.getItem('User')) {
-            fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ user }),
-            })
-                .then((resp) => resp.json())
-                .then((jsonRes) => {
-                    if (jsonRes === 'error') {
-                        console.log(jsonRes);
-                        return;
-                    }
-                    setTodos(jsonRes);
-                });
-        }
+        fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setTodos(jsonRes);
+            });
     }, [user]);
 
     // NEW TODO
@@ -380,21 +376,19 @@ function App() {
 
     // GET NOTES FROM DB
     useEffect(() => {
-        if (localStorage.getItem('User')) {
-            fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ user }),
-            })
-                .then((resp) => resp.json())
-                .then((jsonRes) => {
-                    if (jsonRes === 'error') {
-                        console.log(jsonRes);
-                        return;
-                    }
-                    setNotes(jsonRes);
-                });
-        }
+        fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ user }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    console.log(jsonRes);
+                    return;
+                }
+                setNotes(jsonRes);
+            });
     }, [user]);
 
     // NEW NOTE
