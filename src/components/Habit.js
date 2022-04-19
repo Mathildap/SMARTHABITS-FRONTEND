@@ -35,7 +35,7 @@ function Habit() {
         for (let habit in habits) {
             if (habits[habit]._id === id) {
                 habitInfo = habits[habit];
-                navigate('/rutin/' + habits[habit]._id);
+                navigate('/SMARTHABITS-FRONTEND/rutin/' + habits[habit]._id);
             }
         }
         editHabitId(habitInfo);
@@ -112,7 +112,9 @@ function Habit() {
                 <div>
                     <button
                         className='btn-icon'
-                        onClick={() => navigate('/nyrutin')}
+                        onClick={() =>
+                            navigate('/SMARTHABITS-FRONTEND/nyrutin')
+                        }
                     >
                         <FiPlus className='plus-icon react-icon' />
                     </button>
@@ -173,7 +175,7 @@ function Habit() {
                                                         <div id={habit._id}>
                                                             <Link
                                                                 to={
-                                                                    '/rutin/' +
+                                                                    '/SMARTHABITS-FRONTEND/rutin/' +
                                                                     habit._id
                                                                 }
                                                                 onClick={

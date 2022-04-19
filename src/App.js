@@ -461,7 +461,7 @@ function App() {
                             <Routes>
                                 <Route
                                     exact
-                                    path='/'
+                                    path='/SMARTHABITS-FRONTEND/'
                                     element={
                                         <UserLogIn
                                             userInfo={userInfo}
@@ -471,7 +471,7 @@ function App() {
                                     }
                                 />
                                 <Route
-                                    path='/registrera'
+                                    path='/SMARTHABITS-FRONTEND/registrera'
                                     element={
                                         <UserRegister
                                             emailExist={emailExist}
@@ -503,7 +503,7 @@ function App() {
                             <Router>
                                 <Routes>
                                     <Route
-                                        path='/'
+                                        path='/SMARTHABITS-FRONTEND/'
                                         element={
                                             <LandingPage
                                                 logOutHandler={logOutHandler}
@@ -511,11 +511,11 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/nyrutin'
+                                        path='/SMARTHABITS-FRONTEND/nyrutin'
                                         element={<NewHabit />}
                                     />
                                     <Route
-                                        path='/rutin/:habitId'
+                                        path='/SMARTHABITS-FRONTEND/rutin/:habitId'
                                         element={
                                             <EditHabit
                                                 editHabit={editHabit}
@@ -526,7 +526,7 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path='/nyanteckning'
+                                        path='/SMARTHABITS-FRONTEND/nyanteckning'
                                         element={<NewNote />}
                                     />
                                     <Route path='*' element={<Page404 />} />

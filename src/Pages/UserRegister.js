@@ -76,7 +76,7 @@ function UserRegister({ newUserInfo, emailExist, Auth }) {
                     </button>
                     <button
                         className='btn-link'
-                        onClick={() => navigate('/')}
+                        onClick={() => navigate('/SMARTHABITS-FRONTEND/')}
                         id='signUp'
                     >
                         Har du redan ett konto?{' '}

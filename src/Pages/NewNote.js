@@ -12,7 +12,7 @@ function NewNote() {
     // SUBMIT
     const submitHandler = () => {
         sendNote(noteTitle);
-        navigate('/');
+        navigate('/SMARTHABITS-FRONTEND/');
     };
 
     return (
@@ -20,7 +20,9 @@ function NewNote() {
             <header>
                 <h2>Skapa ny</h2>
                 <div className='buttons'>
-                    <button onClick={() => navigate('/')}>Tillbaka</button>
+                    <button onClick={() => navigate('/SMARTHABITS-FRONTEND/')}>
+                        Tillbaka
+                    </button>
                     <button onClick={submitHandler}>Spara</button>
                 </div>
             </header>

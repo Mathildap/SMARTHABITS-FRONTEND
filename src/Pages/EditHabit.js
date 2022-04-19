@@ -33,12 +33,12 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
     const sendUpdateHandler = () => {
         sendUpdate = { id: editHabit._id, update: habitComplete };
         updateHabit(sendUpdate);
-        navigate('/');
+        navigate('/SMARTHABITS-FRONTEND/');
     };
 
     const deleteHabitHandler = () => {
         deleteHabit(editHabit._id);
-        navigate('/');
+        navigate('/SMARTHABITS-FRONTEND/');
     };
 
     useEffect(() => {
@@ -58,7 +58,11 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
                     <header>
                         <h2>Redigera</h2>
                         <div className='buttons'>
-                            <button onClick={() => navigate('/')}>
+                            <button
+                                onClick={() =>
+                                    navigate('/SMARTHABITS-FRONTEND/')
+                                }
+                            >
                                 Tillbaka
                             </button>
                             <button type='submit' onClick={sendUpdateHandler}>

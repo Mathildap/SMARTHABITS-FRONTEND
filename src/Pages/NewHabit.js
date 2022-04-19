@@ -40,7 +40,7 @@ function NewHabit() {
         };
 
         context(newHabit);
-        navigate('/');
+        navigate('/SMARTHABITS-FRONTEND/');
     };
 
     return (
@@ -49,7 +49,11 @@ function NewHabit() {
                 <header>
                     <h2>Skapa ny</h2>
                     <div className='buttons'>
-                        <button onClick={() => navigate('/')}>Tillbaka</button>
+                        <button
+                            onClick={() => navigate('/SMARTHABITS-FRONTEND/')}
+                        >
+                            Tillbaka
+                        </button>
                         <button type='submit'>Spara</button>
                     </div>
                 </header>
