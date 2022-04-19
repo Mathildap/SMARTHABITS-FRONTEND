@@ -38,11 +38,14 @@ function App() {
     useEffect(() => {
         if (localStorage.getItem('User')) {
             let getUser = JSON.parse(localStorage.getItem('User'));
-            fetch('http://localhost:5000/users/loggedin', {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ getUser }),
-            })
+            fetch(
+                'https://smarthabits-mathildap.herokuapp.com/users/loggedin',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ getUser }),
+                }
+            )
                 .then((resp) => resp.json())
                 .then((jsonRes) => {
                     if (jsonRes === 'error') {
@@ -58,7 +61,7 @@ function App() {
 
     // LOG IN USER
     const userInfo = (info) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/users', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -84,7 +87,7 @@ function App() {
 
     // NEW USER
     const newUserInfo = (newUser) => {
-        fetch('http://localhost:5000/users/new', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/users/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newUser }),
@@ -111,7 +114,7 @@ function App() {
 
     // GOOGLE LOGIN
     const googleLogin = (info) => {
-        fetch('http://localhost:5000/users/googleLogin', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/users/googleLogin', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -152,7 +155,7 @@ function App() {
 
     // GET HABITS FROM DB
     useEffect(() => {
-        fetch('http://localhost:5000/habits/get', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ user }),
@@ -170,7 +173,6 @@ function App() {
     // NEW HABIT
     const newHabitHandler = (info) => {
         if (info.habitDays.length === 0) {
-            console.log('inga dagar');
             info.habitDays = ['none'];
         }
 
@@ -183,7 +185,7 @@ function App() {
             habitMsg: info.habitMsg,
         };
 
-        fetch('http://localhost:5000/habits/new', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newHabit }),
@@ -202,7 +204,7 @@ function App() {
     const updateHabitHandler = (id) => {
         let info = { id: id, userId: user.id };
 
-        fetch('http://localhost:5000/habits/update', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/update', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -225,7 +227,7 @@ function App() {
     const updateHabit = (info) => {
         let sendInfo = { id: info.id, update: info.update, userId: user.id };
 
-        fetch('http://localhost:5000/habits/edit', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/edit', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ sendInfo }),
@@ -242,11 +244,15 @@ function App() {
 
     const idReload = (habitId) => {
         if (editHabit === undefined) {
-            fetch('http://localhost:5000/habits/edit/' + habitId, {
-                method: 'post',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ user: user.id }),
-            })
+            fetch(
+                'https://smarthabits-mathildap.herokuapp.com/habits/edit/' +
+                    habitId,
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ user: user.id }),
+                }
+            )
                 .then((resp) => resp.json())
                 .then((jsonRes) => {
                     if (jsonRes === 'error') {
@@ -261,7 +267,7 @@ function App() {
     // DELETE HABIT
     const deleteHabit = (i) => {
         let info = { userId: user.id, id: i };
-        fetch('http://localhost:5000/habits/delete', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/habits/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -281,7 +287,7 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('http://localhost:5000/todos/get', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ user }),
@@ -303,7 +309,7 @@ function App() {
             todoName: info,
         };
 
-        fetch('http://localhost:5000/todos/new', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/todos/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newTodo }),
@@ -330,7 +336,7 @@ function App() {
 
         let todo = { id: info.id, done: trueOrFalse, userId: user.id };
 
-        fetch('http://localhost:5000/todos/update', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/todos/update', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ todo }),
@@ -349,7 +355,7 @@ function App() {
     const deleteTodo = (info) => {
         let todo = { id: info, userId: user.id };
 
-        fetch('http://localhost:5000/todos/delete', {
+        fetch('hhttps://smarthabits-mathildap.herokuapp.com/todos/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ todo }),
@@ -369,7 +375,7 @@ function App() {
 
     // GET NOTES FROM DB
     useEffect(() => {
-        fetch('http://localhost:5000/notes/get', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ user }),
@@ -391,7 +397,7 @@ function App() {
             noteTitle: info,
         };
 
-        fetch('http://localhost:5000/notes/new', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/notes/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ newNote }),
@@ -410,7 +416,7 @@ function App() {
     const updateNoteText = (note) => {
         let info = { userId: user.id, noteId: note.id, text: note.text };
 
-        fetch('http://localhost:5000/notes/updatetext', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/notes/updatetext', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
@@ -429,7 +435,7 @@ function App() {
     const deleteNote = (note) => {
         let info = { userId: user.id, noteId: note };
 
-        fetch('http://localhost:5000/notes/delete', {
+        fetch('https://smarthabits-mathildap.herokuapp.com/notes/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ info }),
