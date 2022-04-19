@@ -1,6 +1,6 @@
 {
     "name": "smarthabits-frontend",
-    "homepage": "http://mathildap.github.io/SMARTHABITS-FRONTEND",
+    "homepage": "https://mathildap.github.io/SMARTHABITS-FRONTEND",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
