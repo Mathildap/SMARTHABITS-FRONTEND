@@ -14,6 +14,7 @@ import NewHabit from './Pages/NewHabit';
 import EditHabit from './Pages/EditHabit';
 import NewNote from './Pages/NewNote';
 export const HabitContext = React.createContext();
+console.log('test');
 
 function App() {
     // - - - - - - - SMASHSCREEN - - - - - - - //
@@ -461,7 +462,7 @@ function App() {
                             <Routes>
                                 <Route
                                     exact
-                                    path='/SMARTHABITS-FRONTEND'
+                                    path='/'
                                     element={
                                         <UserLogIn
                                             userInfo={userInfo}
