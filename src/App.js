@@ -1,7 +1,12 @@
 import './css/style.css';
 import './css/normalize.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
@@ -481,8 +486,17 @@ function App() {
                                     }
                                 />
                                 <Route
-                                    path='/SMARTHABITS-FRONTEND/*'
+                                    path='/SMARTHABITS-FRONTEND/404'
                                     element={<Page404 />}
+                                />
+                                <Route
+                                    path='*'
+                                    element={
+                                        <Navigate
+                                            replace
+                                            to='SMARTHABITS-FRONTEND/404'
+                                        />
+                                    }
                                 />
                             </Routes>
                         </Router>
