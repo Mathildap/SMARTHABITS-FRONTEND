@@ -12,6 +12,7 @@ function Todo() {
     // STATES
     let [todoName, setTodoName] = useState();
 
+    // SEND TODO TO APP.JS
     const sendTodoHandler = (e) => {
         e.preventDefault();
         newTodo(todoName);

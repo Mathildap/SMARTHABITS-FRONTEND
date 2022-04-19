@@ -16,10 +16,10 @@ import NewNote from './Pages/NewNote';
 export const HabitContext = React.createContext();
 
 function App() {
-    // - - - - - - - SMASHSCREEN - - - - - - - //
+    // - - - - - - - SPLASHSCREEN - - - - - - - //
     let [splashScreen, setSplashScreen] = useState(true);
 
-    // TIMER
+    // TIMER ON SPLASH SCREEN
     useEffect(() => {
         const timer = setTimeout(() => {
             setSplashScreen(false);
@@ -72,7 +72,6 @@ function App() {
                     setErrorMsg('error');
                     return;
                 }
-                console.log(jsonRes);
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
                 localStorage.setItem(
                     'User',

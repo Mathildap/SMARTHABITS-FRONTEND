@@ -26,7 +26,7 @@ function Login({ userInfo, errorMsg, googleLogin }) {
         }
     }
 
-    // SEND INFO
+    // SEND INFO TO APP.JS
     const sendUserInfo = (e) => {
         e.preventDefault();
         let info = { email, password };

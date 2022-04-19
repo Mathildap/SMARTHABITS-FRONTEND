@@ -13,11 +13,13 @@ function NewHabit() {
     let [habitDays, setHabitDays] = useState([]);
     let [habitMsg, setHabitMsg] = useState();
 
+    // PARSE STRING TO NUMBER
     const handleHabitNumber = (e) => {
         let parsedNumber = parseInt(e.target.value);
         setHabitNumber(parsedNumber);
     };
 
+    // HANDLE CHOOSED DAYS
     const handleHabitDays = (e) => {
         if (e.target.checked) {
             setHabitDays([...habitDays, e.target.id]);
@@ -27,7 +29,7 @@ function NewHabit() {
         }
     };
 
-    // SEND HABIT
+    // SEND HABIT TO APP.JS AND NAVIGATE BACK
     const saveHabitHandler = (e) => {
         e.preventDefault();
 

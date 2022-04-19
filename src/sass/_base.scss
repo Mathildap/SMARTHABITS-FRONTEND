@@ -444,8 +444,14 @@ h1 {
 
 /* - - - - - TODO - - - - - */
 .todo-component {
-    position: relative;
-
+    .todos-page {
+        display: flex;
+        flex-flow: column;
+        align-items: space-between;
+    }
+    .todos-container {
+        min-height: 200px;
+    }
     .todo-div {
         width: 95%;
         height: 50px;
@@ -475,8 +481,6 @@ h1 {
     .new-todo-container {
         width: 100%;
         display: flex;
-        position: absolute;
-        bottom: 20px;
 
         input {
             width: 83%;

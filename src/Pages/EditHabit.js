@@ -12,35 +12,41 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
         editHabit && editHabit.completed
     );
 
+    // CHECK IF UNDEFINED -> SEND PARAM TO APP.JS / DB
     useEffect(() => {
         if (editHabit === undefined) {
             idReload(habitId);
         }
     }, []);
 
+    // INCREASE NUMBER
     const increase = () => {
         if (habitComplete <= editHabit.habitNumber - 1) {
             setHabitComplete(habitComplete + 1);
         }
     };
 
+    // DECREASE NUMBER
     const decrease = () => {
         if (habitComplete >= 1) {
             setHabitComplete(habitComplete - 1);
         }
     };
 
+    // SEND UPDATE TO DB AND NAVIGATE BACK
     const sendUpdateHandler = () => {
         sendUpdate = { id: editHabit._id, update: habitComplete };
         updateHabit(sendUpdate);
         navigate('/SMARTHABITS-FRONTEND/');
     };
 
+    // SEND ID TO BD AND NAVIGATE BACK
     const deleteHabitHandler = () => {
         deleteHabit(editHabit._id);
         navigate('/SMARTHABITS-FRONTEND/');
     };
 
+    // BUG WITH COMPLETED NUMBER WHEN REFRESH PAGE
     useEffect(() => {
         if (editHabit === undefined) {
             console.log('vänta');

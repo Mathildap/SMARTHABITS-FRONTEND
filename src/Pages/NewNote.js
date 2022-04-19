@@ -9,7 +9,7 @@ function NewNote() {
     // STATES
     let [noteTitle, setNoteTitle] = useState();
 
-    // SUBMIT
+    // SEND TO APP.JS AND NAVIGATE BACK
     const submitHandler = () => {
         sendNote(noteTitle);
         navigate('/SMARTHABITS-FRONTEND/');

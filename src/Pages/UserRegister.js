@@ -10,7 +10,7 @@ function UserRegister({ newUserInfo, emailExist, Auth }) {
     let [newEmail, setNewEmail] = useState('');
     let [newPassword, setNewPassword] = useState('');
 
-    // NEW USER
+    // SEND NEW USER
     const newUserHandler = (e) => {
         e.preventDefault();
 

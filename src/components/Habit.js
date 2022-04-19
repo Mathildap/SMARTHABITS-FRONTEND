@@ -20,7 +20,7 @@ function Habit() {
     const now = new Date();
     let today = date.format(now, 'dddd').toLowerCase();
 
-    // INCREASE
+    // SEND ID TO INCREASE HABIT
     const updateHabitHandler = (e) => {
         if (e.target.tagName === 'A') {
             return;
@@ -28,7 +28,7 @@ function Habit() {
         updateHabit(e.target.id);
     };
 
-    // EDIT
+    // NAVIGATE TO / RUTIN + ID AND SEND HABIT INFO TO BACKEND
     const editHabitHandler = (e) => {
         let id = e.target.parentNode.id;
         let habitInfo;
@@ -41,13 +41,13 @@ function Habit() {
         editHabitId(habitInfo);
     };
 
-    // COLOR DIV
+    // COLOR DIV DEPENDING ON COMPLETED NUMBER
     const colorDiv = (completed, number) => {
         let percent = (completed / number) * 100;
         return percent;
     };
 
-    // COLORS
+    // ARRAY OF COLORS
     let BGColors = [
         'linear-gradient(0deg, rgba(207,196,253,0.4) 5%, rgba(129,100,255,1) 100%)',
         'linear-gradient(0deg, rgba(255,179,179,1) 5%, rgba(255,0,91,1) 100%)',
