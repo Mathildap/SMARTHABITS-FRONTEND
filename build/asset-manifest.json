@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.6414e997.css",
-    "main.js": "/static/js/main.8fc56c73.js",
-    "index.html": "/index.html",
-    "main.6414e997.css.map": "/static/css/main.6414e997.css.map",
-    "main.8fc56c73.js.map": "/static/js/main.8fc56c73.js.map"
+    "main.css": "/SMARTHABITS-FRONTEND/static/css/main.6414e997.css",
+    "main.js": "/SMARTHABITS-FRONTEND/static/js/main.02fd5a6f.js",
+    "index.html": "/SMARTHABITS-FRONTEND/index.html",
+    "main.6414e997.css.map": "/SMARTHABITS-FRONTEND/static/css/main.6414e997.css.map",
+    "main.02fd5a6f.js.map": "/SMARTHABITS-FRONTEND/static/js/main.02fd5a6f.js.map"
   },
   "entrypoints": [
     "static/css/main.6414e997.css",
-    "static/js/main.8fc56c73.js"
+    "static/js/main.02fd5a6f.js"
   ]
 }

@@ -461,7 +461,7 @@ function App() {
                             <Routes>
                                 <Route
                                     exact
-                                    path='/SMARTHABITS-FRONTEND/'
+                                    path='/SMARTHABITS-FRONTEND'
                                     element={
                                         <UserLogIn
                                             userInfo={userInfo}
@@ -503,7 +503,7 @@ function App() {
                             <Router>
                                 <Routes>
                                     <Route
-                                        path='/SMARTHABITS-FRONTEND/'
+                                        path='/SMARTHABITS-FRONTEND'
                                         element={
                                             <LandingPage
                                                 logOutHandler={logOutHandler}
