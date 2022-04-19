@@ -462,7 +462,7 @@ function App() {
                             <Routes>
                                 <Route
                                     exact
-                                    path='/'
+                                    path='/SMARTHABITS-FRONTEND'
                                     element={
                                         <UserLogIn
                                             userInfo={userInfo}
