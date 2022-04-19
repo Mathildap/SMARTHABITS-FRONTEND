@@ -14,7 +14,6 @@ import NewHabit from './Pages/NewHabit';
 import EditHabit from './Pages/EditHabit';
 import NewNote from './Pages/NewNote';
 export const HabitContext = React.createContext();
-console.log('test');
 
 function App() {
     // - - - - - - - SMASHSCREEN - - - - - - - //
@@ -73,6 +72,7 @@ function App() {
                     setErrorMsg('error');
                     return;
                 }
+                console.log(jsonRes);
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
                 localStorage.setItem(
                     'User',
@@ -156,19 +156,21 @@ function App() {
 
     // GET HABITS FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setHabits(jsonRes);
-            });
+        if (localStorage.getItem('User')) {
+            fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setHabits(jsonRes);
+                });
+        }
     }, [user]);
 
     // NEW HABIT
@@ -288,19 +290,21 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setTodos(jsonRes);
-            });
+        if (localStorage.getItem('User')) {
+            fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setTodos(jsonRes);
+                });
+        }
     }, [user]);
 
     // NEW TODO
@@ -376,19 +380,21 @@ function App() {
 
     // GET NOTES FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setNotes(jsonRes);
-            });
+        if (localStorage.getItem('User')) {
+            fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setNotes(jsonRes);
+                });
+        }
     }, [user]);
 
     // NEW NOTE
@@ -481,7 +487,10 @@ function App() {
                                         />
                                     }
                                 />
-                                <Route path='/*' element={<Page404 />} />
+                                <Route
+                                    path='/SMARTHABITS-FRONTEND/*'
+                                    element={<Page404 />}
+                                />
                             </Routes>
                         </Router>
                     ) : (
@@ -530,7 +539,10 @@ function App() {
                                         path='/SMARTHABITS-FRONTEND/nyanteckning'
                                         element={<NewNote />}
                                     />
-                                    <Route path='/*' element={<Page404 />} />
+                                    <Route
+                                        path='/SMARTHABITS-FRONTEND/*'
+                                        element={<Page404 />}
+                                    />
                                 </Routes>
                             </Router>
                         </HabitContext.Provider>
