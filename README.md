@@ -10,7 +10,7 @@ Smarthabits is an application with three features all in one place
 
 ## 💻 Demo
 
-Live at https://hnkjfeijfe.com
+Live at https://mathildap.github.io/SMARTHABITS-FRONTEND/
 
 #### Test user
 
@@ -34,7 +34,7 @@ Live at https://hnkjfeijfe.com
 ### 🎁 Npm packages:
 
 -   react-router-dom@6. For routing and navigation.
--   date-and-time. Get date and manipulating date.
+-   date-and-time. Get and manipulate date.
 -   react-icons. Icon library.
 -   firebase. For google login.
 -   gsap. Svg animation.
@@ -53,7 +53,7 @@ npm start
 
 ### 🌁 Screenshot
 
-![App Screenshot]('./src/images/screenshot.png')
+![App Screenshot](https://github.com/Mathildap/SMARTHABITS-FRONTEND/blob/main/src/images/screenshot.png)
 
 ## ⚙️ BACK END
 

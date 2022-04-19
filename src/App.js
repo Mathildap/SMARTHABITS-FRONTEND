@@ -487,7 +487,7 @@ function App() {
                                 />
                                 <Route path='/404' element={<Page404 />} />
                                 <Route
-                                    path='*'
+                                    path='/*'
                                     element={<Navigate replace to='/404' />}
                                 />
                             </Routes>
@@ -538,10 +538,18 @@ function App() {
                                         path='/nyanteckning'
                                         element={<NewNote />}
                                     />
-                                    <Route path='/404' element={<Page404 />} />
                                     <Route
-                                        path='*'
-                                        element={<Navigate replace to='/404' />}
+                                        path='/nukomdufel'
+                                        element={<Page404 />}
+                                    />
+                                    <Route
+                                        path='/*'
+                                        element={
+                                            <Navigate
+                                                replace
+                                                to='/nukomdufel'
+                                            />
+                                        }
                                     />
                                 </Routes>
                             </Router>
