@@ -160,19 +160,23 @@ function App() {
 
     // GET HABITS FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setHabits(jsonRes);
-            });
+        let timer = setTimeout(() => {
+            fetch('https://smarthabits-mathildap.herokuapp.com/habits/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setHabits(jsonRes);
+                });
+        }, 10000);
+
+        return () => clearTimeout(timer);
     }, [user]);
 
     // NEW HABIT
@@ -292,19 +296,23 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setTodos(jsonRes);
-            });
+        let timer = setTimeout(() => {
+            fetch('https://smarthabits-mathildap.herokuapp.com/todos/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setTodos(jsonRes);
+                });
+        }, 10000);
+
+        return () => clearTimeout(timer);
     }, [user]);
 
     // NEW TODO
@@ -380,19 +388,23 @@ function App() {
 
     // GET NOTES FROM DB
     useEffect(() => {
-        fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ user }),
-        })
-            .then((resp) => resp.json())
-            .then((jsonRes) => {
-                if (jsonRes === 'error') {
-                    console.log(jsonRes);
-                    return;
-                }
-                setNotes(jsonRes);
-            });
+        let timer = setTimeout(() => {
+            fetch('https://smarthabits-mathildap.herokuapp.com/notes/get', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ user }),
+            })
+                .then((resp) => resp.json())
+                .then((jsonRes) => {
+                    if (jsonRes === 'error') {
+                        console.log(jsonRes);
+                        return;
+                    }
+                    setNotes(jsonRes);
+                });
+        }, 10000);
+
+        return () => clearTimeout(timer);
     }, [user]);
 
     // NEW NOTE

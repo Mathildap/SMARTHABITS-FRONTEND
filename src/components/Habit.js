@@ -30,6 +30,7 @@ function Habit() {
 
     // NAVIGATE TO / RUTIN + ID AND SEND HABIT INFO TO BACKEND
     const editHabitHandler = (e) => {
+        console.log(e.target.parentNode.id);
         let id = e.target.parentNode.id;
         let habitInfo;
         for (let habit in habits) {
