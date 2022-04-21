@@ -8,6 +8,8 @@ Smarthabits is an application with three features all in one place
 
 ✨ Keep your notes tidy and in order by creating a note with a title and then content. You can quickly and easily change your notes or delete when needed.
 
+Mainly developed for mobile use!
+
 ## 💻 Demo
 
 Live at https://mathildap.github.io/SMARTHABITS-FRONTEND/
@@ -27,9 +29,9 @@ Live at https://mathildap.github.io/SMARTHABITS-FRONTEND/
 
 ### 🛠 Tech Stack
 
-**Client:** React, Sass
+**Client:** React (17.0.2), Sass
 
-**Server:** Node, Express, MongoDB Atlas
+**Server:** Node.js, Express, MongoDB Atlas
 
 ### 🎁 Npm packages:
 
@@ -41,15 +43,18 @@ Live at https://mathildap.github.io/SMARTHABITS-FRONTEND/
 
 ### 💽 Run locally
 
-Clone repo
+Clone repo and run
 
 ```
 npm install
-```
-
-```
 npm start
 ```
+
+and open http://localhost:3000.
+
+### 💡 Good to know
+
+Each page has its own component in /src/Pages/. Components that do not have their own page, can be found in /src/components/
 
 ### 🌁 Screenshot
 
@@ -59,8 +64,9 @@ npm start
 
 ---
 
-→ [Back end repo]('https://github.com/Mathildap/SMARTHABITS-BACKEND')
+[Back end repo](https://github.com/Mathildap/SMARTHABITS-BACKEND.git)
 
+Backend are deployed at Heroku.
 Build with Node.js, Express and MongoDB Atlas as database.
 
 ### Npm packages:
@@ -68,6 +74,18 @@ Build with Node.js, Express and MongoDB Atlas as database.
 -   crypto-js. To encrypt passwords.
 -   dotenv. For .env files.
 -   mongoose. For MongoDB.
+
+### Run locally
+
+Clone repo
+
+```
+npm install
+```
+
+```
+npm start
+```
 
 ### Environment Variables
 

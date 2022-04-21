@@ -22,7 +22,7 @@ function Habit() {
 
     // SEND ID TO INCREASE HABIT
     const updateHabitHandler = (e) => {
-        if (e.target.tagName === 'A') {
+        if (e.target.tagName === 'A' || e.target.tagName === 'P') {
             return;
         }
         updateHabit(e.target.id);
@@ -30,7 +30,6 @@ function Habit() {
 
     // NAVIGATE TO / RUTIN + ID AND SEND HABIT INFO TO BACKEND
     const editHabitHandler = (e) => {
-        console.log(e.target.parentNode.id);
         let id = e.target.parentNode.id;
         let habitInfo;
         for (let habit in habits) {

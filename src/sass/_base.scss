@@ -191,7 +191,7 @@ h1 {
     }
     h2 {
         font-weight: 400;
-        margin: 0;
+        margin: 0 0 10px 0;
     }
     .svg-arrow {
         text-align: center;
@@ -273,25 +273,25 @@ h1 {
             text-transform: uppercase;
             color: $default-color;
             font-size: 1.5rem;
-            width: 50%;
+            width: 40%;
             text-align: center;
         }
         .buttons {
-            width: 50%;
-
+            width: 60%;
+            text-align: center;
             button {
                 border: 0;
                 border-radius: 9px;
                 font-family: $default-font;
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 color: $default-color;
-                width: 100px;
-                height: 30px;
+                width: 90px;
+                height: 25px;
                 margin: 0 5px;
                 cursor: pointer;
-
+                font-weight: 400;
                 &:first-of-type {
                     background-color: $medium-grey;
                 }
@@ -414,6 +414,9 @@ h1 {
             align-items: center;
             div {
                 width: 10%;
+            }
+            .trash-icon {
+                font-size: 17px;
             }
         }
         h4 {

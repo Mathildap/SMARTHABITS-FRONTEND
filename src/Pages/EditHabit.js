@@ -46,7 +46,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
         navigate('/');
     };
 
-    // BUG WITH COMPLETED NUMBER WHEN REFRESH PAGE
+    // PROBLEM WITH COMPLETED NUMBER WHEN REFRESH PAGE, NOT SOLVED
     useEffect(() => {
         if (editHabit === undefined) {
             console.log('vänta');
@@ -80,7 +80,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
                                 className='btn-icon'
                                 onClick={deleteHabitHandler}
                             >
-                                <FiTrash2 className='react-icon' />
+                                <FiTrash2 className='react-icon trash-icon' />
                             </button>
                         </div>
                         <p>{editHabit.habitMsg}</p>

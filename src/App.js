@@ -174,7 +174,7 @@ function App() {
                     }
                     setHabits(jsonRes);
                 });
-        }, 10000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [user]);
@@ -310,7 +310,7 @@ function App() {
                     }
                     setTodos(jsonRes);
                 });
-        }, 10000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [user]);
@@ -402,7 +402,7 @@ function App() {
                     }
                     setNotes(jsonRes);
                 });
-        }, 10000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [user]);
