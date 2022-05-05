@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
+import { fetchHabits } from '../store/functions';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectHabits, selectUser } from '../store/selectors';
+import { setHabitsAction } from '../store/habits/habitActions';
 
-function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
+function EditHabit() {
     let navigate = useNavigate();
     let { habitId } = useParams();
-    let sendUpdate;
+    let dispatch = useDispatch();
 
     // STATES
-    let [habitComplete, setHabitComplete] = useState(
-        editHabit && editHabit.completed
-    );
+    let [editHabit, setEditHabit] = useState();
+    let [habitComplete, setHabitComplete] = useState();
+    let habitsState = useSelector(selectHabits);
+    let userState = useSelector(selectUser);
 
-    // CHECK IF UNDEFINED -> SEND PARAM TO APP.JS / DB
     useEffect(() => {
-        if (editHabit === undefined) {
-            idReload(habitId);
+        let array = habitsState.habits;
+        const habit = array.find((h) => h._id === habitId);
+        if (habit) {
+            setEditHabit(habit);
+            setHabitComplete(habit.completed);
         }
     }, []);
 
@@ -34,26 +41,76 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
     };
 
     // SEND UPDATE TO DB AND NAVIGATE BACK
-    const sendUpdateHandler = () => {
-        sendUpdate = { id: editHabit._id, update: habitComplete };
-        updateHabit(sendUpdate);
-        navigate('/');
-    };
+    const updateHabitHandler = async () => {
+        let sendInfo = {
+            id: editHabit._id,
+            update: habitComplete,
+            userId: userState.user.id,
+        };
 
-    // SEND ID TO BD AND NAVIGATE BACK
-    const deleteHabitHandler = () => {
-        deleteHabit(editHabit._id);
-        navigate('/');
-    };
+        try {
+            const res = await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/habits/edit',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ sendInfo }),
+                }
+            ).then((resp) => resp.json());
 
-    // PROBLEM WITH COMPLETED NUMBER WHEN REFRESH PAGE, NOT SOLVED
-    useEffect(() => {
-        if (editHabit === undefined) {
-            console.log('vänta');
-        } else {
-            setHabitComplete(editHabit.completed);
+            if (res === 'error') {
+                return;
+            }
+
+            const stateCopy = habitsState.habits;
+            const newArray = stateCopy.map((habit) => {
+                if (habit._id === editHabit._id) {
+                    const updatedItem = {
+                        ...habit,
+                        completed: habitComplete,
+                    };
+                    return updatedItem;
+                }
+                return habit;
+            });
+
+            setHabitsAction('SET_HABITS', newArray, dispatch);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
         }
-    }, []);
+    };
+
+    // DELETE HABIT
+    const deleteHabit = async () => {
+        let info = { userId: userState.user.id, id: editHabit._id };
+
+        try {
+            const res = await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/habits/delete',
+                {
+                    method: 'delete',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ info }),
+                }
+            ).then((resp) => resp.json());
+
+            if (res === 'error') {
+                console.log(res);
+                return;
+            }
+
+            const stateCopy = habitsState.habits;
+            const itemIndex = stateCopy.findIndex(
+                (habit) => habit._id === editHabit._id
+            );
+            stateCopy.splice(itemIndex, 1);
+            setHabitsAction('SET_HABITS', stateCopy, dispatch);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <>
@@ -67,7 +124,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
                             <button onClick={() => navigate('/')}>
                                 Tillbaka
                             </button>
-                            <button type='submit' onClick={sendUpdateHandler}>
+                            <button type='submit' onClick={updateHabitHandler}>
                                 Spara
                             </button>
                         </div>
@@ -76,10 +133,7 @@ function EditHabit({ editHabit, updateHabit, deleteHabit, idReload }) {
                         <div className='header'>
                             <div />
                             <h4>{editHabit.habitName}</h4>
-                            <button
-                                className='btn-icon'
-                                onClick={deleteHabitHandler}
-                            >
+                            <button className='btn-icon' onClick={deleteHabit}>
                                 <FiTrash2 className='react-icon trash-icon' />
                             </button>
                         </div>

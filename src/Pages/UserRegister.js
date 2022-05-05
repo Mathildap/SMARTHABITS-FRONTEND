@@ -1,14 +1,46 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
+import { setUserHandler } from '../store/functions';
 
-function UserRegister({ newUserInfo, emailExist, Auth }) {
+function UserRegister() {
     let navigate = useNavigate();
+    let dispatch = useDispatch();
 
     // STATES
     let [newUserName, setNewUserName] = useState('');
     let [newEmail, setNewEmail] = useState('');
     let [newPassword, setNewPassword] = useState('');
+    let [emailExist, setEmailExist] = useState(false);
+    let [Auth, setAuth] = useState();
+
+    // NEW USER
+    const newUserInfo = async (newUser) => {
+        let response = await fetch(
+            'https://smarthabits-mathildap.herokuapp.com/users/new',
+            {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ newUser }),
+            }
+        ).then((resp) => resp.json());
+
+        if (response === 'email exist') {
+            setEmailExist(true);
+            return;
+        }
+
+        setUserHandler(response, dispatch);
+        setAuth(true);
+        localStorage.setItem(
+            'User',
+            JSON.stringify({
+                userName: response.username,
+                id: response.id,
+            })
+        );
+    };
 
     // SEND NEW USER
     const newUserHandler = (e) => {

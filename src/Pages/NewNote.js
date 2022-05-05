@@ -1,18 +1,43 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { HabitContext } from '../App';
+import { selectNotes, selectUser } from '../store/selectors';
+import { setNotesAction } from '../store/notes/notesActions';
 
 function NewNote() {
     let navigate = useNavigate();
-    let sendNote = useContext(HabitContext).newNote;
+    let dispatch = useDispatch();
 
     // STATES
     let [noteTitle, setNoteTitle] = useState();
+    let notesState = useSelector(selectNotes);
+    let userState = useSelector(selectUser);
 
-    // SEND TO APP.JS AND NAVIGATE BACK
-    const submitHandler = () => {
-        sendNote(noteTitle);
-        navigate('/');
+    // NEW NOTE
+    const submitHandler = async () => {
+        let newNote = {
+            userId: userState.user.id,
+            noteTitle: noteTitle,
+        };
+
+        try {
+            const res = await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/notes/new',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ newNote }),
+                }
+            ).then((resp) => resp.json());
+
+            const stateCopy = notesState.notes;
+            stateCopy.push(res);
+            setNotesAction('SET_NOTES', stateCopy, dispatch);
+
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (

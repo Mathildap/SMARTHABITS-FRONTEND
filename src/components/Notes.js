@@ -1,48 +1,103 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import { HabitContext } from '../App';
-import { BiTrash } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNotes, selectUser } from '../store/selectors';
+import { fetchNotes } from '../store/functions';
+import { setNotesAction } from '../store/notes/notesActions';
+import Note from './Note';
 
 function Notes() {
-    let navigate = useNavigate();
-    let editRef = useRef();
-    let notes = useContext(HabitContext).notes;
-    let updateNoteText = useContext(HabitContext).notesHandler;
-    let onDelete = useContext(HabitContext).deleteNoteHandler;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // STATES
-    let [toggleText, setToggleText] = useState();
-    let [text, setText] = useState();
+    const userState = useSelector(selectUser);
+    const notesState = useSelector(selectNotes);
 
-    // SEND TEXT TO APP.JS
-    const saveText = () => {
-        if (text === undefined) {
-            return;
+    const getNotesHandler = async () => {
+        if (notesState.notes.length === 0) {
+            const response = await fetchNotes(userState.user.id);
+            setNotesAction('SET_NOTES', response, dispatch);
         } else {
-            updateNoteText(text);
-            setText();
+            console.log('notes exist');
         }
     };
 
-    // CLICK OUTSIDE TEXTAREA SAVES TEXT
     useEffect(() => {
-        if (editRef.current === undefined || editRef.current === null) {
+        getNotesHandler();
+    }, []);
+
+    // UPDATE TEXT
+    const saveText = async (i) => {
+        const info = {
+            userId: userState.user.id,
+            noteId: i.noteId,
+            text: i.text,
+        };
+
+        const stateCopy = notesState.notes;
+        const findNote = stateCopy.find((note) => note._id === i.noteId);
+        if (findNote.noteText === i.text) {
+            console.log('spara inte!');
             return;
-        } else {
-            let handler = (event) => {
-                if (!editRef.current.contains(event.target)) {
-                    saveText();
-                }
-            };
-
-            document.addEventListener('mousedown', handler);
-
-            return () => {
-                document.removeEventListener('mousedown', handler);
-            };
         }
-    });
+
+        try {
+            await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/notes/updatetext',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ info }),
+                }
+            ).then((resp) => resp.json());
+
+            const stateCopy = notesState.notes;
+            const findNote = stateCopy.find((note) => note._id === i.noteId);
+            findNote.noteText = i.text;
+
+            const newArray = stateCopy.map((note) => {
+                if (note._id === i.noteId) {
+                    const updatedItem = {
+                        ...note,
+                        noteText: findNote.noteText,
+                    };
+                    return updatedItem;
+                }
+                return note;
+            });
+
+            setNotesAction('SET_NOTES', newArray, dispatch);
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    };
+
+    // DELETE NOTE
+    const onDelete = async (id) => {
+        const info = { userId: userState.user.id, noteId: id };
+
+        try {
+            await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/notes/delete',
+                {
+                    method: 'delete',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ info }),
+                }
+            ).then((resp) => resp.json());
+
+            const stateCopy = notesState.notes;
+            const itemIndex = stateCopy.findIndex((note) => note.id === id);
+            stateCopy.splice(itemIndex, 1);
+            setNotesAction('SET_NOTES', stateCopy, dispatch);
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    };
 
     return (
         <section className='habit-component landning-page-component todo-component notes-component'>
@@ -58,65 +113,15 @@ function Notes() {
             </header>
 
             <article className='todos-page'>
-                {notes === undefined ? (
-                    ''
-                ) : (
+                {!notesState.notes ? null : (
                     <div className='todos-container'>
-                        {notes.map((note) => (
-                            <div key={note._id}>
-                                <button
-                                    onClick={() =>
-                                        setToggleText(
-                                            toggleText === note._id
-                                                ? ''
-                                                : note._id
-                                        )
-                                    }
-                                    className={`${
-                                        toggleText === note._id
-                                            ? 'active-note todo-div'
-                                            : 'todo-div'
-                                    }`}
-                                    key={note._id}
-                                >
-                                    <p className='note-title'>
-                                        {note.noteTitle}
-                                    </p>
-                                    {toggleText === note._id ? (
-                                        <button
-                                            onClick={() => onDelete(note._id)}
-                                            className='btn-icon delete'
-                                        >
-                                            <BiTrash />
-                                        </button>
-                                    ) : (
-                                        ''
-                                    )}
-                                </button>
-                                {toggleText === note._id ? (
-                                    <textarea
-                                        ref={editRef}
-                                        id={note._id}
-                                        className='note-text-div'
-                                        value={
-                                            text
-                                                ? note._id === text.id
-                                                    ? text.text
-                                                    : ''
-                                                : note.noteText
-                                        }
-                                        rows='10'
-                                        onChange={(e) =>
-                                            setText({
-                                                id: e.target.id,
-                                                text: e.target.value,
-                                            })
-                                        }
-                                    />
-                                ) : (
-                                    ''
-                                )}
-                            </div>
+                        {notesState.notes.map((note) => (
+                            <Note
+                                note={note}
+                                saveText={saveText}
+                                onDelete={onDelete}
+                                key={note._id}
+                            />
                         ))}
                     </div>
                 )}

@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase/firebase';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import logo from '../images/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoggedInUserHandler, setUserHandler } from '../store/functions';
+import { selectUser } from '../store/selectors';
 
-function Login({ userInfo, errorMsg, googleLogin }) {
+function Login() {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // STATES
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
+    let [errorMsg, setErrorMsg] = useState(false);
+    let userState = useSelector(selectUser);
+
+    // CHECK IF USER IS LOGGED IN
+    useEffect(() => {
+        if (localStorage.getItem('User')) {
+            let getUser = JSON.parse(localStorage.getItem('User'));
+            setLoggedInUserHandler(getUser, dispatch);
+            return;
+        }
+        if (userState.error) {
+            setErrorMsg(true);
+        }
+    }, [userState, dispatch]);
 
     // GOOGLE LOGIN
     async function signInWithGoogle() {
@@ -26,11 +44,37 @@ function Login({ userInfo, errorMsg, googleLogin }) {
         }
     }
 
-    // SEND INFO TO APP.JS
+    // GOOGLE LOGIN
+    const googleLogin = (info) => {
+        fetch('https://smarthabits-mathildap.herokuapp.com/users/googleLogin', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                const googleUser = {
+                    userName: jsonRes.username,
+                    id: jsonRes.id,
+                    googleLogin: jsonRes.googleLogin,
+                };
+                setUserHandler(googleUser, dispatch);
+                localStorage.setItem(
+                    'User',
+                    JSON.stringify({
+                        userName: jsonRes.username,
+                        id: jsonRes.id,
+                    })
+                );
+            })
+            .catch((err) => console.log(err));
+    };
+
+    // SEND INFO TO DB
     const sendUserInfo = (e) => {
         e.preventDefault();
         let info = { email, password };
-        userInfo(info);
+        setUserHandler(info, dispatch);
     };
 
     return (

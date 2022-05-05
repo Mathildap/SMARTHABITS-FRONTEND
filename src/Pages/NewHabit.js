@@ -1,17 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { HabitContext } from '../App';
+import { setHabitsAction } from '../store/habits/habitActions';
+import { selectHabits, selectUser } from '../store/selectors';
 
 function NewHabit() {
-    let navigate = useNavigate();
-    let context = useContext(HabitContext).newHabit;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // STATES
-    let [habitName, setHabitName] = useState('');
-    let [habitGoal, setHabitGoal] = useState('1Idag');
-    let [habitNumber, setHabitNumber] = useState();
+    const [habitName, setHabitName] = useState('');
+    const [habitGoal, setHabitGoal] = useState('1Idag');
+    const [habitNumber, setHabitNumber] = useState();
     let [habitDays, setHabitDays] = useState([]);
-    let [habitMsg, setHabitMsg] = useState();
+    const [habitMsg, setHabitMsg] = useState();
+    const userState = useSelector(selectUser);
+    const habitsState = useSelector(selectHabits);
 
     // PARSE STRING TO NUMBER
     const handleHabitNumber = (e) => {
@@ -29,11 +33,16 @@ function NewHabit() {
         }
     };
 
-    // SEND HABIT TO APP.JS AND NAVIGATE BACK
-    const saveHabitHandler = (e) => {
+    // NEW HABIT
+    const saveHabitHandler = async (e) => {
         e.preventDefault();
 
+        if (habitDays.length === 0) {
+            habitDays = ['none'];
+        }
+
         let newHabit = {
+            userId: userState.user.id,
             habitName: habitName,
             habitGoal: habitGoal,
             habitNumber: habitNumber,
@@ -41,8 +50,24 @@ function NewHabit() {
             habitMsg: habitMsg,
         };
 
-        context(newHabit);
-        navigate('/');
+        try {
+            const res = await fetch(
+                'https://smarthabits-mathildap.herokuapp.com/habits/new',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ newHabit }),
+                }
+            ).then((resp) => resp.json());
+
+            const stateCopy = habitsState.habits;
+            stateCopy.push(res);
+
+            setHabitsAction('SET_HABITS', stateCopy, dispatch);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
