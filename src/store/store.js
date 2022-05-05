@@ -4,7 +4,6 @@ import { userReducer } from './users/usersReducer';
 import { todosReducer } from './todos/todosReducer';
 import { notesReducer } from './notes/notesReducer';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 
 const rootReducers = combineReducers({
     habitReducer: habitReducer,
@@ -13,9 +12,11 @@ const rootReducers = combineReducers({
     notesReducer: notesReducer,
 });
 
-export const store = createStore(
-    rootReducers,
-    applyMiddleware(thunk, logger) /* preloadedState, */ +
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// export const store = createStore(
+//     rootReducers,
+//     applyMiddleware(thunk, logger) /* preloadedState, */ +
+//         window.__REDUX_DEVTOOLS_EXTENSION__ &&
+//         window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+export const store = createStore(rootReducers, applyMiddleware(thunk));
