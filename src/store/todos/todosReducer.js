@@ -1,26 +1,27 @@
 export const initialState = {
     todos: [],
     loading: false,
-    error: false,
+    error: null,
 };
 
 export const todosReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_TODOS':
-            return (state = {
-                ...state,
-                todos: action.payload.todos,
-            });
         case 'LOADING_TODOS':
-            return (state = {
+            return {
                 ...state,
                 loading: action.payload.loading,
-            });
+            };
+        case 'SET_TODOS':
+            return {
+                ...state,
+                todos: action.payload.todos,
+                loading: action.payload.loading,
+            };
         case 'ERROR_TODOS':
-            return (state = {
+            return {
                 ...state,
                 error: action.payload.error,
-            });
+            };
         default:
             return state;
     }

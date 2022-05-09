@@ -1,4 +1,6 @@
 export const setTodosAction = (type, todos, dispatch) => {
+    dispatch({ type: 'LOADING_TODOS', payload: { loading: true } });
+
     try {
         dispatch({
             type,
@@ -7,11 +9,11 @@ export const setTodosAction = (type, todos, dispatch) => {
                 loading: false,
             },
         });
-    } catch (err) {
+    } catch (error) {
         dispatch({
             type: 'ERROR_TODOS',
             payload: {
-                error: true,
+                error,
             },
         });
     }

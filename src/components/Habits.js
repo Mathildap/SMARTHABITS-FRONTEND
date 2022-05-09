@@ -168,23 +168,39 @@ function Habits() {
                 </div>
             </header>
             <article className='habit-container'>
-                {habitsState.habits === undefined ? (
-                    ''
+                {habitsState.loading ? (
+                    <h4>LADDAR...</h4>
                 ) : (
                     <>
-                        {habitsState.habits
-                            .sort((a, b) =>
-                                a.habitGoal < b.habitGoal ? -1 : 1
-                            )
-                            .map((habit, i) => (
-                                <Habit
-                                    habit={habit}
-                                    i={i}
-                                    updateHabitHandler={updateHabitHandler}
-                                    BGColors={BGColors}
-                                    key={habit._id}
-                                />
-                            ))}
+                        {habitsState.error ? (
+                            <h4>HITTAR INGA RUTINER..</h4>
+                        ) : (
+                            <>
+                                {habitsState.habits === undefined ? (
+                                    ''
+                                ) : (
+                                    <>
+                                        {habitsState.habits
+                                            .sort((a, b) =>
+                                                a.habitGoal < b.habitGoal
+                                                    ? -1
+                                                    : 1
+                                            )
+                                            .map((habit, i) => (
+                                                <Habit
+                                                    habit={habit}
+                                                    i={i}
+                                                    updateHabitHandler={
+                                                        updateHabitHandler
+                                                    }
+                                                    BGColors={BGColors}
+                                                    key={habit._id}
+                                                />
+                                            ))}
+                                    </>
+                                )}
+                            </>
+                        )}
                     </>
                 )}
             </article>

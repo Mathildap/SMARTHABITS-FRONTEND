@@ -1,7 +1,7 @@
 export const initialState = {
     habits: [],
     loading: false,
-    error: false,
+    error: null,
 };
 
 export const habitReducer = (state = initialState, action) => {
@@ -10,6 +10,7 @@ export const habitReducer = (state = initialState, action) => {
             return (state = {
                 ...state,
                 habits: action.payload.habits,
+                loading: action.payload.loading,
             });
         case 'LOADING_HABITS':
             return (state = {

@@ -139,35 +139,52 @@ function Todos() {
                 <div />
             </header>
             <article className='todos-page'>
-                {todosState.todos === undefined ? (
-                    ''
+                {todosState.loading ? (
+                    <h4>LADDAR...</h4>
                 ) : (
                     <>
-                        <div className='todos-container'>
-                            {todosState.todos.map((todo) => (
-                                <Todo
-                                    todo={todo}
-                                    key={todo._id}
-                                    onToggle={onToggle}
-                                    deleteTodo={deleteTodo}
-                                />
-                            ))}
-                        </div>
-                        <form
-                            onSubmit={sendTodoHandler}
-                            className='new-todo-container'
-                        >
-                            <input
-                                type='text'
-                                id='newTodoInput'
-                                placeholder='Betala sneakers på Klarna, Boka padelmatch, etc.'
-                                onChange={(e) => setTodoName(e.target.value)}
-                                required
-                            />
-                            <button type='submit' className='btn-icon'>
-                                <FiPlus className='react-icon' />
-                            </button>
-                        </form>
+                        {todosState.error ? (
+                            <h4>HITTAR INGA RUTINER..</h4>
+                        ) : (
+                            <>
+                                {todosState.todos === undefined ? (
+                                    ''
+                                ) : (
+                                    <>
+                                        <div className='todos-container'>
+                                            {todosState.todos.map((todo) => (
+                                                <Todo
+                                                    todo={todo}
+                                                    key={todo._id}
+                                                    onToggle={onToggle}
+                                                    deleteTodo={deleteTodo}
+                                                />
+                                            ))}
+                                        </div>
+                                        <form
+                                            onSubmit={sendTodoHandler}
+                                            className='new-todo-container'
+                                        >
+                                            <input
+                                                type='text'
+                                                id='newTodoInput'
+                                                placeholder='Betala sneakers på Klarna, Boka padelmatch, etc.'
+                                                onChange={(e) =>
+                                                    setTodoName(e.target.value)
+                                                }
+                                                required
+                                            />
+                                            <button
+                                                type='submit'
+                                                className='btn-icon'
+                                            >
+                                                <FiPlus className='react-icon' />
+                                            </button>
+                                        </form>
+                                    </>
+                                )}
+                            </>
+                        )}
                     </>
                 )}
             </article>

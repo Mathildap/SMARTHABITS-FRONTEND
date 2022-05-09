@@ -1,4 +1,6 @@
 export const setHabitsAction = (type, habits, dispatch) => {
+    dispatch({ type: 'LOADING_HABITS', payload: { loading: true } });
+
     try {
         dispatch({
             type,
@@ -11,7 +13,7 @@ export const setHabitsAction = (type, habits, dispatch) => {
         dispatch({
             type: 'ERROR_HABITS',
             payload: {
-                error: true,
+                err,
             },
         });
     }

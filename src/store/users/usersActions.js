@@ -1,4 +1,14 @@
 export const setUserAction = (type, user, dispatch) => {
+    if (user === 'error') {
+        dispatch({
+            type: 'ERROR_USER',
+            payload: {
+                error: true,
+            },
+        });
+        return;
+    }
+
     try {
         dispatch({
             type,
@@ -12,17 +22,4 @@ export const setUserAction = (type, user, dispatch) => {
             },
         });
     }
-
-    dispatch({
-        type: 'ERROR_USER',
-        payload: {
-            error: true,
-        },
-    });
-    dispatch({
-        type: 'LOADING_USER',
-        payload: {
-            loading: false,
-        },
-    });
 };

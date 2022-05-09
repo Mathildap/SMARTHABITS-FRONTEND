@@ -1,4 +1,6 @@
 export const setNotesAction = (type, notes, dispatch) => {
+    dispatch({ type: 'LOADING_NOTES', payload: { loading: true } });
+
     try {
         dispatch({
             type,
@@ -11,7 +13,7 @@ export const setNotesAction = (type, notes, dispatch) => {
         dispatch({
             type: 'ERROR_NOTES',
             payload: {
-                error: true,
+                err,
             },
         });
     }

@@ -1,26 +1,28 @@
 export const initialState = {
     notes: [],
     loading: false,
-    error: false,
+    error: null,
 };
 
 export const notesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_NOTES':
-            return (state = {
-                ...state,
-                notes: action.payload.notes,
-            });
         case 'LOADING_NOTES':
-            return (state = {
+            return {
                 ...state,
                 loading: action.payload.loading,
-            });
+            };
+        case 'SET_NOTES':
+            return {
+                ...state,
+                notes: action.payload.notes,
+                loading: action.payload.loading,
+            };
+
         case 'ERROR_NOTES':
-            return (state = {
+            return {
                 ...state,
                 error: action.payload.error,
-            });
+            };
         default:
             return state;
     }

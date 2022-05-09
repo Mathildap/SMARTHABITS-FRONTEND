@@ -113,17 +113,29 @@ function Notes() {
             </header>
 
             <article className='todos-page'>
-                {!notesState.notes ? null : (
-                    <div className='todos-container'>
-                        {notesState.notes.map((note) => (
-                            <Note
-                                note={note}
-                                saveText={saveText}
-                                onDelete={onDelete}
-                                key={note._id}
-                            />
-                        ))}
-                    </div>
+                {notesState.loading ? (
+                    <h4>LADDAR...</h4>
+                ) : (
+                    <>
+                        {notesState.error ? (
+                            <h4>HITTAR INGA RUTINER..</h4>
+                        ) : (
+                            <>
+                                {!notesState.notes ? null : (
+                                    <div className='todos-container'>
+                                        {notesState.notes.map((note) => (
+                                            <Note
+                                                note={note}
+                                                saveText={saveText}
+                                                onDelete={onDelete}
+                                                key={note._id}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </>
                 )}
             </article>
         </section>
